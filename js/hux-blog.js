@@ -5,8 +5,8 @@
  */
 
  /*!
- * Hux Blog v1.6.0 (http://startbootstrap.com)
- * Copyright 2016 @huxpro
+ * Frank Blog v1.6.0 (http://startbootstrap.com)
+ * Copyright 2016 @shufanhao
  * Licensed under Apache 2.0 
  */
 
