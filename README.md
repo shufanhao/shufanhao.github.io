@@ -2,7 +2,7 @@
 This blog based on
  * [hexo](https://hexo.io/docs/) 
  * them [stun](https://theme-stun.github.io/docs/zh-CN/guide/quick-start.html#安装)
- * https://shufanhao.github.io
+ * https://timemachine.icu
 ## Getting Started
 ### Branch definition
 * hexo: default branch. Create article by this branch.
