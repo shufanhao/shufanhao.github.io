@@ -26,8 +26,6 @@ jobs:
         run: |
           git submodule init
           git submodule update
-          echo "Sleep 10"
-          sleep 10
       - name: Use Node.js ${{ matrix.node_version }}
         uses: actions/setup-node@v1
         with:
