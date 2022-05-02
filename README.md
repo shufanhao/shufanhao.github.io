@@ -6,7 +6,13 @@ This blog based on
 ## Getting Started
 ### Branch definition
 * hexo: default branch. Create article by this branch.
-* master: used for generating files, this is deployment branch.
+* master: used for generating files, this is deployment branch. After run helo deploy defined in _config.yaml, will update master branch.
+    ```yaml
+    deploy:
+  - type: git
+    repo: git@github.com:shufanhao/shufanhao.github.io.git
+    branch: master
+    ```
 ### Clone Repo
 ```shell script
 git clone git@github.com:shufanhao/shufanhao.github.io.git
