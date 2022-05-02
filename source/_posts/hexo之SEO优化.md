@@ -1,5 +1,5 @@
 ---
-title: hexo SEO优化偏
+title: hexo SEO优化
 categories: hexo
 tags: hexo
 abbrlink: cfd1b897
