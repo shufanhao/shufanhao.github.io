@@ -3,19 +3,19 @@ title: hexo + github pages 创建你的个人博客
 tags: hexo
 categories: hexo
 abbrlink: c5404504
-date: 2022-03-17 14:27:36
+date: 2022-04-30 14:27:36
 ---
 ### 为什么要创建自己的博客
-之前自己的博客是写在CSDN，[shu-frank的专栏](https://blog.csdn.net/u011563903?type=blog)。但是为什么还要自己setup blog 呢？ 
+自己的博客是写在CSDN，[shu-frank的专栏](https://blog.csdn.net/u011563903?type=blog)。但为什么还要自己setup blog 呢？ 
 * 有一个自己定制的Website不爽么。
 * 学习下Hexo + github pages
-* 可以写点防止被墙的信息。
+* 可以写点防止被墙的文章。
 <!--more-->
 
 ### hexo 
-
+[参考Stun](https://theme-stun.github.io/docs/zh-CN/guide/quick-start.html#安装)
 #### hexo 安装
-创建 github pages 和创建普通的 github 仓库没太大区别（记住仓库名称是 username.github.io），这里就不在赘述了。以下的安装基于 mac。
+创建 github pages 和创建普通的 github 仓库没太大区别（记住仓库名称是 username.github.io）。以下安装基于 mac。
 - 安装 node 和 npm
 ```sh
 brew install node
@@ -36,7 +36,7 @@ hexo d -g 生成并部署
 hexo s 本地部署
 hexo g 生成站点
 hexo clean
-hexo new 新建文章
+hexo new 新建文章 
 ```
 
 #### 基础配置
@@ -124,19 +124,6 @@ symbols_count_time:
   awl: 4
   wpm: 275
 ```
-##### 不蒜子统计
-添加站点统计，比如 uv，pv 这些，可以选择百度统计，谷歌统计，不蒜字等。可以参考[官方文档](https://theme-stun.iissnan.com/third-party-services.html)。这里选用了不蒜子
-修改主题配置文件
-```yml
-busuanzi_count:
-  enable: true
-  total_visitors: true
-  total_visitors_icon: fa fa-user
-  total_views: true
-  total_views_icon: fa fa-eye
-  post_views: true
-  post_views_icon: fa fa-eye
-```
 ##### 添加搜索栏
 安装搜索插件
 ```sh
@@ -152,32 +139,7 @@ search:
   format: html
   limit: 10000
 ```
-##### RSS 订阅
-安装插件
-```sh
-npm install hexo-generator-feed --save
 
-```
-修改站点配置文件，添加以下内容
-```
-# RSS
-# feed
-# Dependencies: https://github.com/hexojs/hexo-generator-feed
-feed:
-  type: atom
-  path: atom.xml
-  limit: 20
-  hub:
-  content:
-```
-修改主题配置文件
-```
-follow_me:
-  #Twitter: https://twitter.com/username || fab fa-twitter
-  #Telegram: https://t.me/channel_name || fab fa-telegram
-  #WeChat: /images/wechat_channel.jpg || fab fa-weixin
-  RSS: /atom.xml || fa fa-rss
-```
 ##### 相关文章
 安装插件
 ```sh
@@ -235,22 +197,12 @@ disqus:
   #post_meta_order: 0
 ```
 
-##### 部署到 git
+##### 部署到 git 
 安装插件
 ```
 npm install hexo-deployer-git --save
 ```
-修改站点配置文件，部署站点，如果你以前没有使用过 git 的话，最好配置下 SSH
-```
-deploy:
-  - type: git
-    repo: git@github.com:Flyraty/Flyraty.github.io.git
-    branch: master
-
-```
-直接 `hexo d -g` 并不会把你的博客源文件，比如文章 markdown push 到仓库，只是生成 public 下的静态 html push 到了站点进行渲染。此处建议新开一分支 hexo ，push 站点源文件到 hexo 分之上用于备份，可以把 hexo 分支设置为默认分支。
-
-
+具体参考：https://shufanhao.github.io/posts/1eb3f811/
 #### 美化
 ##### 代码框风格，并添加复制按钮
 修改主题配置文件，设置 theme 和 style
@@ -268,50 +220,6 @@ codeblock:
     # Available values: default | flat | mac
     style: mac
 ```
-##### 动态背景图片
-新建 source/_date/styles.styl，添加如下代码，如果想要设置动态背景效果，只需要将 `background:url`替换成一个动态背景接口就行了。
-设置了背景图片，可能会导致文字看不到，所以需要设置透明度。
-tips: 推荐图片网址 `https://wallhaven.cc/`
-<details>
-	<summary>styles.styl</summary>>
-	```css
-	// 设置背景图片
-	body {
-	    background:url(/images/girl.jpg);
-	    background-repeat: no-repeat;
-	    background-attachment:fixed; //不重复
-	    background-size: cover;      //填充
-	    background-position:50% 50%;
-	}
-
-	//博客内容透明化
-	//文章内容的透明度设置
-	.content-wrap {
-	  opacity: 0.9;
-	}
-
-	//侧边框的透明度设置
-	.sidebar {
-	  opacity: 0.9;
-	}
-	//菜单栏的透明度设置
-	.header-inner {
-	  background: rgba(255,255,255,0.9);
-	}
-	//搜索框（local-search）的透明度设置
-	.popup {
-	  opacity: 0.9;
-	}
-	```
-
-</details>
-
-修改主题配置文件，打开自定义 styles.styl 设置
-```yml
-custom_file_path:
-	style: source/_data/styles.sty
-```
-
 ##### 页面动画效果
 hexo 内置了一些页面动态效果。如果想打开的话，只需要在主题配置文件里搜索打开即可。
 - canvas_nest
@@ -418,9 +326,9 @@ quicklink:
 
 ```
 ##### SEO
-主要就是生成站点地图并提交百度和谷歌收录，生成永久链接，参考 https://flyraty.github.io/posts/cfd1b897/
+主要就是生成站点地图并提交百度和谷歌收录，生成永久链接，参考: https://shufanhao.github.io/posts/cfd1b897/
 
 
 ### 参考
-[小丁的博客](https://tding.top)
+[timemachine](https://timemachine.icu)
 

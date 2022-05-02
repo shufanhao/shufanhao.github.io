@@ -9,8 +9,11 @@ date: 2022-05-01 19:22:13
 ### 前言
 使用 github pages 托管个人博客网站，使用双分支来保存博客源文件，使用 git submodule 来管理更新主题文件，使用 github actions 来做持续集成。
 <!--more-->
-
 ### hexo 持续集成
+#### 双分支
+* hexo 分支。添加文章，修改文章基于该分支。
+* master分支，deploy到线上的分支，该分支存放的是最后generate的文件。在github pages中设置master分支。
+
 #### 生成公钥私钥
 这一步主要是为了 CI 中提交代码，生成了两个文件，公钥文件 github-deploy-key.pub，私钥文件 github-deploy-key。需要注意，如果你是在博客目录执行的命令，需要在 .gitignore 中加入这两个文件，避免上传到仓库中。
 ```sh
@@ -20,7 +23,7 @@ ssh-keygen -t rsa  -C "$(git config user.name)" -f github-deploy-key
 #### 添加仓库环境变量
 设置 HEXO_DEPLOY_PUB，value 是上步生成的 github-deploy-key.pub 文件内容。
 ![](https://timemachine-blog.oss-cn-beijing.aliyuncs.com/img/0081Kckwgy1gk0pc9xn3hj31yq0s6aex.jpg)
-设置 HEXO_DEPLOY_PRI, value是github-deploy-key 文件内容
+设置 HEXO_DEPLOY_PRI, action中添加secret, value是github-deploy-key文件内容
 ![](https://timemachine-blog.oss-cn-beijing.aliyuncs.com/img/0081Kckwgy1gk0pe8e498j321e0t8djp.jpg)
 
 #### 添加 workflow
