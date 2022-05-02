@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://shufanhao.github.io/sitemap.xml
+Sitemap: https://shufanhao.github.io/baidusitemap.xml
