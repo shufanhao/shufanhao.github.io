@@ -8,7 +8,7 @@ subtitle: '上天之所以不给你，是因为你要的不够强烈2'
 descriptin: '于离别之朝束起约定之花'
 keywords: Docker,Kubernetes,k8s,Java,Mac,Linux,生活,life,容器，云，编程
 author: Frank
-language: zh-CN # en
+language: en # zh-CN
 timezone: Asia/shanghai
 
 # URL
@@ -130,7 +130,7 @@ Plugins:
   - hexo-generator-seo-friendly-sitemap
 baidusitemap:
   path: baidusitemap.xml
-sitemap:
+sitemap: # google
   path: sitemap.xml
 
 # RSS

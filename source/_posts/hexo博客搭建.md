@@ -1,10 +1,15 @@
 ---
-title: hexo + github pages 创建你的酷炫博客
+title: hexo + github pages 创建你的个人博客
 tags: hexo
 categories: hexo
 abbrlink: c5404504
 date: 2022-03-17 14:27:36
 ---
+### 为什么要创建自己的博客
+之前自己的博客是写在CSDN，[shu-frank的专栏](https://blog.csdn.net/u011563903?type=blog)。但是为什么还要自己setup blog 呢？ 
+* 有一个自己定制的Website不爽么。
+* 学习下Hexo + github pages
+* 可以写点防止被墙的信息。
 
 ### hexo 
 
