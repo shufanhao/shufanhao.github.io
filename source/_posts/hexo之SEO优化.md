@@ -46,13 +46,13 @@ sitemap:
 `hexo g` ，`hexo s` 后，可以访问 `localhost:4000/sitemap.xml` 查看站点地图。
 
 ### 提交到 google search console
-查看站点是否被收录。
+查看站点是否被收录。参考 [here](https://theme-stun.github.io/docs/zh-CN/advanced/third-part.html#谷歌站长)
 ```
-site:https://flyraty.github.io
+https://shufanhao.github.io
 ```
 登录 google search console ，验证自己对网站的所有权，选择适合自己的方式，建议选择验证码方式，直接修改主题配置文件
 ```
-google_site_verification: zkSnlx4XqngA-8SYFGRahJ85Xh3odO9uB6ILJk6UZHM
+google_site_verification: 
 ```
 重新部署后，点击验证。提交 sitemap。
 
