@@ -10,10 +10,11 @@ date: 2022-04-29 10:15:36
 大学读于济南，广交天下友；
 读研于大魔都，喜逛沪世间；
 沉迷IT互联网，善程序编码。
-
 ### 微信公众号
 欢迎关注我个人公众号，分享生活的感悟。
-![](/assets/wechat_haoyunlailin.jpg?size=200x200)
+![](/assets/about/wechat_haoyunlailin.jpg?size=200x200)
+### CSDN 博客
+[shu-Frank的专栏](https://blog.csdn.net/u011563903)
 ### Github Stats
 ![flyraty's github stats](https://github-readme-stats.vercel.app/api?username=shufanhao&show_icons=true)
 
