@@ -30,7 +30,7 @@ bing_site_verification:
 
 # Baidu Webmaster tools verification setting, 站长工具
 # See: https://ziyuan.baidu.com/site/
-baidu_site_verification: code-T7rR9rNo6e
+baidu_site_verification: code-q9cCzVTEA7
 
 # 360 Webmaster tools verification setting
 # see http://zhanzhang.so.com/
@@ -57,7 +57,7 @@ menu:
   about: /about/ || fas fa-user
   book: /book/ || fas fa-book
   # gallery: /gallery/ || fas fa-image
-  # notes: https://shufanhao.github.io/flink_learning_notes || fas fa-sticky-note
+  # notes: https://shufanhao.top/flink_learning_notes || fas fa-sticky-note
   # You can add a secondary menu like follow.
   # xxx1: javascript:; || fa(s|r|l|d|b) fa-xxx
 

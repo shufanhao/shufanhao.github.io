@@ -49,7 +49,7 @@ sitemap:
 ### 提交到 google search console
 查看站点是否被收录。参考 [here](https://theme-stun.github.io/docs/zh-CN/advanced/third-part.html#谷歌站长)
 ```
-https://shufanhao.github.io
+https://shufanhao.top
 ```
 登录 google search console ，验证自己对网站的所有权，选择适合自己的方式，建议选择验证码方式，直接修改主题配置文件
 ```

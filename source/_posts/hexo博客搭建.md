@@ -202,7 +202,7 @@ disqus:
 ```
 npm install hexo-deployer-git --save
 ```
-具体参考：https://shufanhao.github.io/posts/1eb3f811/
+具体参考：https://shufanhao.top/posts/1eb3f811/
 #### 美化
 ##### 代码框风格，并添加复制按钮
 修改主题配置文件，设置 theme 和 style
@@ -326,7 +326,7 @@ quicklink:
 
 ```
 ##### SEO
-主要就是生成站点地图并提交百度和谷歌收录，生成永久链接，参考: https://shufanhao.github.io/posts/cfd1b897/
+主要就是生成站点地图并提交百度和谷歌收录，生成永久链接，参考: https://shufanhao.top/posts/cfd1b897/
 
 
 ### 参考
