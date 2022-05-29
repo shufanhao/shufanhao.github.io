@@ -5,6 +5,9 @@ tags: cloud native
 abbrlink: f378b788
 date: 2022-05-29 13:08:48
 ---
+## 前言
+本文介绍了Container Runtime 调用CNI的流程，并且通过简单的代码来模拟CNI的调用。
+<!--more-->
 ## CNI 介绍
 CNI是Container Networking Interface的缩写，它的目的是标准化容器运行时引擎和网络实现之间的接口，它是将容器连接到网络的最低标准方法。
 
