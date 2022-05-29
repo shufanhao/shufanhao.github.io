@@ -26,6 +26,7 @@ Install hexo and packages
 ```shell script
 npm install hexo-cli -g
 npm install --save hexo-renderer-pug
+npm install hexo-abbrlink --save
 ```
 Start server:
 ```shell script
