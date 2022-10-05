@@ -1,5 +1,5 @@
 ---
-title: 一文搞懂大数据入门之Sqoop
+title: 大数据入门之Sqoop
 categories: BigData
 tags: BigData
 abbrlink: 2c84cdcc
