@@ -1,5 +1,5 @@
 ---
-title: 宏观经济学通识课-读书笔记
+title: 宏观经济学通识课--读书笔记
 categories: book
 tags:
   - book
