@@ -1,5 +1,5 @@
 ---
-title: 一文搞定centos VM 在MAC M1安装
+title: 一文搞定通过UTM 在MAC M1上安装centos/ubuntu VM
 categories: tools
 tags: tools
 abbrlink: fc62d617
