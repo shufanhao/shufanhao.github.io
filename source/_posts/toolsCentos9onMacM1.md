@@ -1,7 +1,11 @@
 ---
 title: 一文搞定通过UTM 在MAC M1上安装centos/ubuntu VM
-categories: tools
-tags: tools
+categories:
+  - MacOS
+  - tools
+tags:
+  - MacOS
+  - tools
 abbrlink: fc62d617
 date: 2022-11-03 15:04:23
 ---

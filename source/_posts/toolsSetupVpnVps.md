@@ -11,6 +11,7 @@ date: 2022-05-29 23:29:01
 2. 看看YouTube。
 3. 学习下不同的技术。
 <!--more-->
+
 ## What's v2ray
 
 Refer [here](https://www.sagetool.com/jishuzixun/45.html#:~:text=V2Ray优点%20更完善的协议%3A%20V2Ray%20使用了新的自行研发的%20VMess%20协议，改正了%20Shadowsocks%20一些已有的缺点，更难被墙检测到,更强大的性能%3A%20网络性能更好，具体数据可以看%20V2Ray%20官方博客%20更丰富的功能%3A%20以下是部分%20V2Ray%20的功能：)
