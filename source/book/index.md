@@ -10,8 +10,10 @@ type: book
 
 ### Gitbook
 
-### 书籍
+### Books
 [计算机网络](https://book.douban.com/subject/24740558/)
 [宏观经济学通识课](https://pan.baidu.com/s/1-W6V6FC0rWU9HTzYo9thZg) 提取密码：o0vg
 [思考的技术](https://github.com/wuzhiyi/wzy-warehouse/blob/master/PDF/人文/思考的技术－大前研一.pdf)
 [Go语言精进之路](https://weread.qq.com/web/reader/f343248072895ed9f34f408)
+[富爸爸给你的钱找一份工作](https://mp.weixin.qq.com/s/WiVJl9zNZJambaiAFm-QGA)
+[编写可读代码的艺术](https://awesome-programming-books.github.io/clean-code/编写可读代码的艺术.pdf)
