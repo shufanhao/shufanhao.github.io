@@ -70,7 +70,8 @@ from
   left join active on total.id = active.id
   left join paid on active.id = paid.id
 ```
-if changed to `left join paid on active.id = paid.id` to `left join paid on total.id = paid.id`, there is no different. 
+if changed to `left join paid on active.id = paid.id` to `left join paid on total.id = paid.id`,  will base on total.id not active.id 
+
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/3e4f8eae116241ae93ac02c6cb53a302.png)
 
 ## user case 
