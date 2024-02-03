@@ -4,17 +4,19 @@ date: 2022-04-29 10:15:36
 ---
 ### 我
 
-山东济南人士，生于小村落；
-幼时喜踢足球，奔跑于田地；
-高中热爱打球，挥汗于操场；
-大学读于济南，广交天下友；
-读研于大魔都，喜逛沪世间；
-沉迷IT互联网，善程序编码。
+济南乡野一少年，足球伴我乐无边。
+高中操场英姿爽，球技不输职业仙。
+大学济南友四海，学问共研互取长。
+沪上繁华尽收眼，研学沪间技艺强。
+IT世界魅力大，编程沉醉其中间。
+
 ### 微信公众号
 欢迎关注我个人公众号，分享生活的感悟。
 ![](/assets/about/wechat_haoyunlailin.jpg?size=200x200)
+
 ### CSDN 博客
 [shu-Frank的专栏](https://blog.csdn.net/u011563903)
+
 ### Github Stats
 ![flyraty's github stats](https://github-readme-stats.vercel.app/api?username=shufanhao&show_icons=true)
 
