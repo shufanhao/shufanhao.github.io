@@ -1,0 +1,552 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/jiqiren-16x16.svg?v=2.2.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/jiqiren-32x32.svg?v=2.2.0" type="image/png" sizes="32x32"><meta name="google-site-verification" content="36z2JWLXgmHzuSp23WuqFEQMXfAhw7XD-Pe-rJtCpI0"><meta name="baidu-site-verification" content="code-q9cCzVTEA7"><meta name="description" content="WhatTableau 是一个可视化分析平台，它改变了我们使用数据解决问题的方式，使个人和组织能够充分利用自己的数据。 Tableau提供了非常丰富的图表，通过及其强大的功能，使得数据的可视化极其容易。Tableau，至少是我遇到最强大的可视化平台。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tableau 入门系列之各种图形绘制">
+<meta property="og:url" content="https://shufanhao.top/posts/1324e406/index.html">
+<meta property="og:site_name" content="Frank&#39;s Blog">
+<meta property="og:description" content="WhatTableau 是一个可视化分析平台，它改变了我们使用数据解决问题的方式，使个人和组织能够充分利用自己的数据。 Tableau提供了非常丰富的图表，通过及其强大的功能，使得数据的可视化极其容易。Tableau，至少是我遇到最强大的可视化平台。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/119d6e903cc946fdab647bd11fcafff3.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/4ac3a481184d4fad9425c55235d1c9d5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5c230ac0aef54673a83d23d1795612c0.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/9ccd2a6c1ab64d5bb5e3d14cd49f761a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/d4f93a628ac343cb97525f89e688325f.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a3ad603dd41043bc885ea6797cc313b5.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a1e4f92a0627447b9a2fce3e1156e1dd.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5afb7bd5c73d457fb6f2d6ce8f4e361d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c82ddd0bcf6d452c95013c74106e1967.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/a2c6960eaceb426f8d95cf228c89b26a.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/ecc440572c384818aa36073a8293becf.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/be176a2f3fb841d2b6dbb7d0a33a69ab.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e92758bf79c1434982ad64aaef8cc928.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/7c03b30bef7b401fb846b6cd2ba496b1.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/c6a0bd7069614198a23dec2c20f021cd.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/e018eef77a6845ab893f4aeed09b67cc.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/5410710e30d3486991dda1efb1be162d.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/3dbe8b47949a49d1b78834dad5909e16.png">
+<meta property="article:published_time" content="2022-12-01T15:19:27.000Z">
+<meta property="article:modified_time" content="2024-06-08T08:02:22.353Z">
+<meta property="article:author" content="Frank 微信公众号 浩运来琳">
+<meta property="article:tag" content="BigData">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/119d6e903cc946fdab647bd11fcafff3.png"><title>Tableau 入门系列之各种图形绘制 | Frank's Blog</title><link ref="canonical" href="https://shufanhao.top/posts/1324e406/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.2.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Frank's Blog" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/book/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">书籍</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Frank's Blog</div><div class="header-banner-info__subtitle">上天之所以不给你，是因为你要的不够强烈</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Tableau 入门系列之各种图形绘制</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-12-01</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2024-06-08</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.1k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">6分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="What"   >
+          <a href="#What" class="heading-link"><i class="fas fa-link"></i></a>What</h2>
+      <p>Tableau 是一个可视化分析平台，它改变了我们使用数据解决问题的方式，使个人和组织能够充分利用自己的数据。</p>
+<p>Tableau提供了非常丰富的图表，通过及其强大的功能，使得数据的可视化极其容易。Tableau，至少是我遇到最强大的可视化平台。</p>
+<a id="more"></a>
+
+        <h2 id="熟悉Tableau"   >
+          <a href="#熟悉Tableau" class="heading-link"><i class="fas fa-link"></i></a>熟悉Tableau</h2>
+      <p>如何下载及安装这里不讲了。可以先用试用版，试着熟悉下tableau。讲几个重要的概念。</p>
+<img src="https://img-blog.csdnimg.cn/119d6e903cc946fdab647bd11fcafff3.png" width="500">
+
+<ol>
+<li>Data source。是用来连接各种数据，包括excel, 各种sql 数据库，no sql 数据库，spark，trino等。只有你想不到的数据，没有它连接不了的数据。想要做数据visulization的第一步就是要连接数据。连接数据后，也可以做一下数据的预处理。</li>
+<li>Worksheet。是绘图的一个工作空间，最后制作dashboard的时候，就是由一个个Worksheet组成。</li>
+<li>Dimensions(维度)。当连接到数据源的时候，Tableau将离散类型的字段(例如：值类型是字符串或者布尔值的字段)分配到Dimensions中。将Dimensions中的字段点击或拖拽进入行或者列当中时，Tableau就创建了行或列的标题。</li>
+<li>Measures(度量)。当连接到某个数据源的时候，Tableau会将包含数字信息的字段分配到Measure上。当拖拽一个Measure字段到行或者列上时，Tableau会创建一根连续的轴。</li>
+<li>Dashboard。就是最后通过拖拽Worksheet，构建dashboard，展示给用户的是最终的dashboard。</li>
+<li>Marks(标记)。可以更改图的类型，颜色，文字等。这个是很重要的，通过修改mark来达到自己想要的效果。</li>
+<li>Show me(智能推荐)。会根据你选择的Dimensions或者Measures，去推荐可以应用的图形。</li>
+</ol>
+
+        <h2 id="绘制各种图形"   >
+          <a href="#绘制各种图形" class="heading-link"><i class="fas fa-link"></i></a>绘制各种图形</h2>
+      <p>Follow 这个视频系列：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yZ4y1W7YM/" >https://www.bilibili.com/video/BV1yZ4y1W7YM/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </p>
+<p>视频所用到的超市数据：<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://download.csdn.net/download/u011563903/87222298" >link</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>完整的练习: <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://download.csdn.net/download/u011563903/87229964" >超市分析.twbx</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></p>
+<p>另外能翻墙的话，youtube上有很多高质量的Tableau教学视频可以参考。</p>
+
+        <h3 id="柱状图-📊"   >
+          <a href="#柱状图-📊" class="heading-link"><i class="fas fa-link"></i></a>柱状图 📊</h3>
+      <p>直接将利润拖拽到Rows，然后类别，子类别拖拽到Columns，然后子类别拖到color，就可以根据子类别显示颜色，效果图:<br><img src="https://img-blog.csdnimg.cn/4ac3a481184d4fad9425c55235d1c9d5.png" width="400"></p>
+
+        <h3 id="折线图📈"   >
+          <a href="#折线图📈" class="heading-link"><i class="fas fa-link"></i></a>折线图📈</h3>
+      <p>一张图显示两个measures, 销售额和利润。将利润和销售额拖到Rows，然后订单日期拖到Column，订单日期也可以更改成按quarter, week, day。</p>
+<p>还要注意一点，因为Rows是两个，相当于两个图层，所以要选择Dual Axis的方式。<br><img src="https://img-blog.csdnimg.cn/5c230ac0aef54673a83d23d1795612c0.png" width="400"></p>
+<p>最后效果图：<br><img src="https://img-blog.csdnimg.cn/9ccd2a6c1ab64d5bb5e3d14cd49f761a.png" width="400"></p>
+
+        <h3 id="饼图"   >
+          <a href="#饼图" class="heading-link"><i class="fas fa-link"></i></a>饼图</h3>
+      <p>直接将字段和折扣拖到Marks里。</p>
+<img src="https://img-blog.csdnimg.cn/d4f93a628ac343cb97525f89e688325f.png" width="400">
+
+
+        <h3 id="文字云"   >
+          <a href="#文字云" class="heading-link"><i class="fas fa-link"></i></a>文字云</h3>
+      <p>通过文字的颜色和大小展示数据的方式。</p>
+<img src="https://img-blog.csdnimg.cn/a3ad603dd41043bc885ea6797cc313b5.png" width="400">
+
+
+        <h3 id="气泡图"   >
+          <a href="#气泡图" class="heading-link"><i class="fas fa-link"></i></a>气泡图</h3>
+      <img src="https://img-blog.csdnimg.cn/a1e4f92a0627447b9a2fce3e1156e1dd.png" width="400">
+
+
+        <h3 id="热图"   >
+          <a href="#热图" class="heading-link"><i class="fas fa-link"></i></a>热图</h3>
+      <p>通过图形的大小来展示数据<br><img src="https://img-blog.csdnimg.cn/5afb7bd5c73d457fb6f2d6ce8f4e361d.png" width="400"></p>
+
+        <h3 id="突出显示图"   >
+          <a href="#突出显示图" class="heading-link"><i class="fas fa-link"></i></a>突出显示图</h3>
+      <p>通过颜色的深浅来凸显数据。</p>
+<img src="https://img-blog.csdnimg.cn/c82ddd0bcf6d452c95013c74106e1967.png" width="400">
+
+
+        <h3 id="筛选器"   >
+          <a href="#筛选器" class="heading-link"><i class="fas fa-link"></i></a>筛选器</h3>
+      <p>可以将字段拖到filter里指定需要exclude或者选中的字段。</p>
+<img src="https://img-blog.csdnimg.cn/a2c6960eaceb426f8d95cf228c89b26a.png" width="400">
+
+
+        <h3 id="参考线"   >
+          <a href="#参考线" class="heading-link"><i class="fas fa-link"></i></a>参考线</h3>
+      <p>可以画出一根在图中的参考线。<br><img src="https://img-blog.csdnimg.cn/ecc440572c384818aa36073a8293becf.png" width="400"></p>
+
+        <h3 id="地图"   >
+          <a href="#地图" class="heading-link"><i class="fas fa-link"></i></a>地图</h3>
+      <p>如果选择城市，省等map数据后不能显示地图，有两个可能的原因：<br>1.选中字段省/自治区 —&gt; Geographic Role -&gt; State/Province，意思要让tableau知道这个字段是一个省的字段。<br><img src="https://img-blog.csdnimg.cn/be176a2f3fb841d2b6dbb7d0a33a69ab.png" width="400"></p>
+<p>2.如果你的系统版本是英文的，然后在选择制作地图的时候，内容是空的图层，解决方法是：Map -&gt;  Edit Location -&gt; Country/Region 改成China。反之英文的字段也有可能存在这个问题。并且点击感叹号旁边的1 issue,2issues 可以手动map tableau不能识别的数据。</p>
+<img src="https://img-blog.csdnimg.cn/e92758bf79c1434982ad64aaef8cc928.png" width="400">
+
+<p>开始绘制地图，想要显示省、城市的销售额数据。</p>
+<p>因为是要同时显示省和城市两个维度，要制作两个图层，Rows里新加一个latitude(generated)，然后设置<br><img src="https://img-blog.csdnimg.cn/7c03b30bef7b401fb846b6cd2ba496b1.png" width="400"></p>
+<p>在mark里就会看到有2个图层<br><img src="https://img-blog.csdnimg.cn/c6a0bd7069614198a23dec2c20f021cd.png" width="400"></p>
+<p>设置第二个Marks，改成Circle，就可以显示出如果是Circle大就表明销售额数据高，并且颜色也深。<br><img src="https://img-blog.csdnimg.cn/e018eef77a6845ab893f4aeed09b67cc.png" width="400"></p>
+<p>如果是要制作热地图，则选择Density。<br><img src="https://img-blog.csdnimg.cn/5410710e30d3486991dda1efb1be162d.png" width="400"></p>
+
+        <h2 id="制作Dashboard"   >
+          <a href="#制作Dashboard" class="heading-link"><i class="fas fa-link"></i></a>制作Dashboard</h2>
+      <p>Dashboard是通过object组成的，一般是先选择一个Vertical的，然后再在Vertical中插入每一行，每一行就是要插入每一个Horizontal，然后再在Horizontal中插入每一个worksheet，并且一定要选择Tiled，否则如果选择Floating的话，worksheet是不能放进对应的Horizontal中。</p>
+<img src="https://img-blog.csdnimg.cn/3dbe8b47949a49d1b78834dad5909e16.png" width="400">
+
+<p>另外也可以在size里，自己custom size，选择range，可以指定最大和最小的size。</p>
+<p>另外也可以参考别人比较好的dashboard，<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://www.vizwiz.com/" >https://www.vizwiz.com</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> </p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://shufanhao.top">Frank 微信公众号 浩运来琳</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://shufanhao.top/posts/1324e406/">https://shufanhao.top/posts/1324e406/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/BigData/">BigData</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/assets/ali_pay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/assets/wechat_pay.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/32acde64/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">用Tinyproxy搭建自己的proxy server</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/fc62d617/"><span class="paginator-prev__text">一文搞定通过UTM 在MAC M1上安装centos/ubuntu VM</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#What"><span class="toc-number">1.</span> <span class="toc-text">
+          What</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%86%9F%E6%82%89Tableau"><span class="toc-number">2.</span> <span class="toc-text">
+          熟悉Tableau</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%98%E5%88%B6%E5%90%84%E7%A7%8D%E5%9B%BE%E5%BD%A2"><span class="toc-number">3.</span> <span class="toc-text">
+          绘制各种图形</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE-%F0%9F%93%8A"><span class="toc-number">3.1.</span> <span class="toc-text">
+          柱状图 📊</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%98%E7%BA%BF%E5%9B%BE%F0%9F%93%88"><span class="toc-number">3.2.</span> <span class="toc-text">
+          折线图📈</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A5%BC%E5%9B%BE"><span class="toc-number">3.3.</span> <span class="toc-text">
+          饼图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%87%E5%AD%97%E4%BA%91"><span class="toc-number">3.4.</span> <span class="toc-text">
+          文字云</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B0%94%E6%B3%A1%E5%9B%BE"><span class="toc-number">3.5.</span> <span class="toc-text">
+          气泡图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%83%AD%E5%9B%BE"><span class="toc-number">3.6.</span> <span class="toc-text">
+          热图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AA%81%E5%87%BA%E6%98%BE%E7%A4%BA%E5%9B%BE"><span class="toc-number">3.7.</span> <span class="toc-text">
+          突出显示图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AD%9B%E9%80%89%E5%99%A8"><span class="toc-number">3.8.</span> <span class="toc-text">
+          筛选器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E7%BA%BF"><span class="toc-number">3.9.</span> <span class="toc-text">
+          参考线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%B0%E5%9B%BE"><span class="toc-number">3.10.</span> <span class="toc-text">
+          地图</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9CDashboard"><span class="toc-number">4.</span> <span class="toc-text">
+          制作Dashboard</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/WechatIMG112.jpeg" alt="avatar"></div><p class="sidebar-ov-author__text">越努力，越幸运</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/shufanhao" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2043858835" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="1144825268" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">28</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">10</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">14</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2024</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Frank 微信公众号 浩运来琳</span></div><div><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.2.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://shufanhao.top/posts/1324e406/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://shufanhao.top/posts/1324e406/';
+        this.page.identifier = 'posts/1324e406/';
+        this.page.title = 'Tableau 入门系列之各种图形绘制';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://shufanhao-github-io.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://shufanhao-github-io.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.2.0"></script><script src="/js/stun-boot.js?v=2.2.0"></script><script src="/js/scroll.js?v=2.2.0"></script><script src="/js/header.js?v=2.2.0"></script><script src="/js/sidebar.js?v=2.2.0"></script><script type="application/json" src="/search.xml"></script></body></html>
