@@ -1,7 +1,9 @@
 ---
 title: 认知觉醒：开启自我改变的原动力-- 读书笔记
 categories: book
-tags: book
+tags:
+  - book
+  - study
 abbrlink: fa70c6fa
 date: 2024-04-06 16:53:00
 ---
