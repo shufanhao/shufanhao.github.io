@@ -1,0 +1,521 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/jiqiren-16x16.svg?v=2.2.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/jiqiren-32x32.svg?v=2.2.0" type="image/png" sizes="32x32"><meta name="google-site-verification" content="36z2JWLXgmHzuSp23WuqFEQMXfAhw7XD-Pe-rJtCpI0"><meta name="baidu-site-verification" content="code-q9cCzVTEA7"><meta name="description" content="前言本文介绍了Container Runtime 调用CNI的流程，并且通过简单的代码来模拟CNI的调用。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Container Runtime 如何用CNI">
+<meta property="og:url" content="https://shufanhao.top/posts/f378b788/index.html">
+<meta property="og:site_name" content="Frank&#39;s Blog">
+<meta property="og:description" content="前言本文介绍了Container Runtime 调用CNI的流程，并且通过简单的代码来模拟CNI的调用。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzU3NUI2NkE3RkU4NTQ1Mjc5NkU3QjBCM0E0QzMyMEE0LzEwODQ3">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzE4M0ZGQzRDMjlERTQ2RkY4MzlGOEE3QTg0RjlDRDA0LzEwODg1">
+<meta property="og:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzM4MzQ2N0EyNTQyRjRDQUU5OUMzMzg4NDJFNkIxQTQ2LzEwODkz">
+<meta property="article:published_time" content="2022-05-29T05:08:48.000Z">
+<meta property="article:modified_time" content="2025-02-15T04:52:28.773Z">
+<meta property="article:author" content="Frank 微信公众号 浩运来琳">
+<meta property="article:tag" content="cloud native">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzU3NUI2NkE3RkU4NTQ1Mjc5NkU3QjBCM0E0QzMyMEE0LzEwODQ3"><title>Container Runtime 如何用CNI | Frank's Blog</title><link ref="canonical" href="https://shufanhao.top/posts/f378b788/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.2.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Frank's Blog" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/book/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">书籍</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Frank's Blog</div><div class="header-banner-info__subtitle">上天之所以不给你，是因为你要的不够强烈</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">Container Runtime 如何用CNI</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2022-05-29</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2025-02-15</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">15分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="前言"   >
+          <a href="#前言" class="heading-link"><i class="fas fa-link"></i></a>前言</h2>
+      <p>本文介绍了Container Runtime 调用CNI的流程，并且通过简单的代码来模拟CNI的调用。</p>
+<a id="more"></a>
+
+        <h2 id="CNI-介绍"   >
+          <a href="#CNI-介绍" class="heading-link"><i class="fas fa-link"></i></a>CNI 介绍</h2>
+      <p>CNI是Container Networking Interface的缩写，它的目的是标准化容器运行时引擎和网络实现之间的接口，它是将容器连接到网络的最低标准方法。</p>
+<p><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking" >CNI</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 项目主要是做了三件事情：</p>
+<ol>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking/cni/blob/master/SPEC.md" >CNI接口的定义</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking/cni/blob/1773a1f24c559506d7d36e838db19338e266878f/cnitool/cnitool.go#L25" >Golang的library</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span> 提供CNI接口的实现。</li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins" >CNI插件</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>的实现，包括Bridge,ipvlan,macvlan等。</li>
+</ol>
+<p>可以用下面这张图来总结CNI的工作原理：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzU3NUI2NkE3RkU4NTQ1Mjc5NkU3QjBCM0E0QzMyMEE0LzEwODQ3" alt="image"></p>
+<p>在理解CNI时，需要注意以下几点：</p>
+<ul>
+<li>实现CNI标准的插件是二进制的，而不是守护进程。在运行时，它应该至少具有<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://man7.org/linux/man-pages/man7/capabilities.7.html" >cap-net-admin</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span>功能。</li>
+<li>网络定义或网络配置存储为JSON文件。这些JSON文件通过stdin流式传输到插件。类似的json文件在k8s中会存储在/et/cni/net.d/下面，如：10-calico.conflist</li>
+<li>只有在创建容器（运行时变量）时才知道的任何信息都应该通过环境变量传递给插件。不过，在最新的CNI中，也可以通过stdin上的JSON发送某些运行时配置，特别是对于一些扩展和可选功能, <span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking/cni/blob/master/CONVENTIONS.md" >参考</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li>二进制文件中不应该有上述两个之外的任何其他输入配置。</li>
+<li>CNI插件负责连接容器，并希望隐藏网络复杂性。</li>
+</ul>
+
+        <h2 id="容器运行时-Container-Runtime-介绍"   >
+          <a href="#容器运行时-Container-Runtime-介绍" class="heading-link"><i class="fas fa-link"></i></a>容器运行时(Container Runtime)介绍</h2>
+      <p>容器运行时engine是一个守护进程，位于容器调度和容器创建的二进制文件的实际实现之间。这个守护进程不一定需要作为根用户运行，它监听来自调度程序的请求。它通过容器标准(OCI)，使用外部二进制文件来实际创建或删除容器。</p>
+<p>例如，在kubernetes中，容器运行时可以是cri-o或cri-containerd），它监听来自kubelet的请求，kubelet是通过cri接口从位于每个节点的调度程序发出的代理，容器运行时通过OCI标准方式，包括OCI-Image和OCI-Runtime，调用runc（实现OCI运行时规范的二进制文件，或者如：kata-runtime）来创建容器，调用flannel（实现CNI的二进制文件，或者如：calico等）来配置网络。上述过程，如下图：</p>
+<p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzE4M0ZGQzRDMjlERTQ2RkY4MzlGOEE3QTg0RjlDRDA0LzEwODg1" alt="image"></p>
+<p>容器运行时需要执行以下操作才能真正创建可用的容器：</p>
+<ul>
+<li>创建rootfs文件系统。</li>
+<li>创建容器（在命名空间中独立运行并受cgroups限制的进程集）。</li>
+<li>将容器连接到网络。</li>
+<li>启动用户进程。</li>
+</ul>
+<p>如下图：<br><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly9ub3RlLnlvdWRhby5jb20veXdzL3B1YmxpYy9yZXNvdXJjZS8yNGQ5ODVkYjllMjA0MzI0MDUxMGMzMTg2YTcxNTdkZS94bWxub3RlLzM4MzQ2N0EyNTQyRjRDQUU5OUMzMzg4NDJFNkIxQTQ2LzEwODkz" alt="image"></p>
+<p>就网络部分而言，最重要的是容器运行时要求OCI运行时二进制文件将容器进程放入新的网络命名空间（Net namespace）。然后容器运行时将使用新的网络名称空间作为运行时环境变量变量调用CNI插件。CNI插件应该拥有所有的信息，以便实现网络配置。</p>
+
+        <h2 id="容器运行如何使用CNI"   >
+          <a href="#容器运行如何使用CNI" class="heading-link"><i class="fas fa-link"></i></a>容器运行如何使用CNI</h2>
+      <p>下面以一个例子，说明容器运行时如何使用CNI的<span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins/tree/master/plugins/main/bridge" >Bridge</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span><br>将容器连接到网桥，下面将使用简单的bash命令”模拟”运行时的操作。</p>
+
+        <h3 id="配置阶段"   >
+          <a href="#配置阶段" class="heading-link"><i class="fas fa-link"></i></a>配置阶段</h3>
+      <p>在完成下面的例子演示之前，需要做基本的服务器配置。只需要确保所需的二进制程序存在即可。需要OCI运行时二进制(Runc), CNI插件二进制(Bridge，Host Loca(用于ip的分配))。<br>我们可以从github下载预构建的二进制文件，也可以从源代码构建二进制文件。前提是需要一个go的环境。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">go get github.com&#x2F;opencontainers&#x2F;runc</span><br><span class="line">go get github.com&#x2F;containernetworking&#x2F;plugins</span><br><span class="line">cd $GOPATH&#x2F;src&#x2F;github.com&#x2F;containernetworking&#x2F;plugins</span><br><span class="line">.&#x2F;build.sh</span><br><span class="line">sudo mkdir -p &#x2F;opt&#x2F;cni&#x2F;&#123;bin,netconfs&#125;</span><br><span class="line">sudo cp bin&#x2F;* &#x2F;opt&#x2F;cni&#x2F;bin&#x2F;</span><br><span class="line">which &#x2F;opt&#x2F;cni&#x2F;bin&#x2F;&#123;bridge,host-local&#125; runc</span><br></pre></td></tr></table></div></figure>
+<p>在配置阶段，先创建容器需要连接的Bridge, 类似docker0的网桥</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link add name br0 type bridge</span><br><span class="line">ip addr add 10.10.10.1&#x2F;24 dev br0</span><br><span class="line">ip link set dev br0 up</span><br></pre></td></tr></table></div></figure>
+<p>然后，添加网络配置的文件如下：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">export NETCONFPATH&#x3D;&#x2F;opt&#x2F;cni&#x2F;netconfs</span><br><span class="line">cat &gt; $NETCONFPATH&#x2F;10-mynet.conf &lt;&lt;EOF</span><br><span class="line">&#123;</span><br><span class="line">    &quot;cniVersion&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;name&quot;: &quot;mynet&quot;,</span><br><span class="line">    &quot;type&quot;: &quot;bridge&quot;,</span><br><span class="line">    &quot;bridge&quot;: &quot;br0&quot;,             </span><br><span class="line">    &quot;isGateway&quot;: true,</span><br><span class="line">    &quot;ipMasq&quot;: true,</span><br><span class="line">    &quot;ipam&quot;: &#123;</span><br><span class="line">        &quot;type&quot;: &quot;host-local&quot;,</span><br><span class="line">        &quot;subnet&quot;: &quot;10.10.10.0&#x2F;24&quot;,</span><br><span class="line">        &quot;routes&quot;: [</span><br><span class="line">            &#123; &quot;dst&quot;: &quot;0.0.0.0&#x2F;0&quot; &#125;</span><br><span class="line">        ],</span><br><span class="line">     &quot;dataDir&quot;: &quot;&#x2F;run&#x2F;ipam-state&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;dns&quot;: &#123;</span><br><span class="line">      &quot;nameservers&quot;: [ &quot;8.8.8.8&quot; ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">EOF</span><br></pre></td></tr></table></div></figure>
+
+        <h3 id="容器Runtime阶段"   >
+          <a href="#容器Runtime阶段" class="heading-link"><i class="fas fa-link"></i></a>容器Runtime阶段</h3>
+      <p>容器调度器(如：k8s)最终将命令容器运行时启动容器。运行时将执行以下简化步骤：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># Step 1: 创建 the rootfs 目录</span><br><span class="line">mkdir bundle &amp;&amp; cd bundle&#x2F;</span><br><span class="line">mkdir -p rootfs &amp;&amp; docker export $(docker create busybox) | tar -C rootfs -xvf -</span><br><span class="line"></span><br><span class="line"># Step 2: 创建 OCI runtime config</span><br><span class="line">runc spec</span><br><span class="line"># Step 3: 启动container</span><br><span class="line">runc run busyboxid</span><br><span class="line"># Step 4: 另一个窗口，找到net namespace的路径，并软连接到&#x2F;var&#x2F;run&#x2F;netns&#x2F;xx</span><br><span class="line">ns&#x3D;$(cat &#x2F;var&#x2F;run&#x2F;runc&#x2F;busyboxid&#x2F;state.json | jq &#39;.namespace_paths.NEWNET&#39; -r)</span><br><span class="line">mkdir -p &#x2F;var&#x2F;run&#x2F;netns</span><br><span class="line">ln -sf $ns &#x2F;var&#x2F;run&#x2F;netns&#x2F;busyboxid</span><br><span class="line">ip netns </span><br><span class="line"></span><br><span class="line"># $ runc list</span><br><span class="line"># ID          PID         STATUS      BUNDLE         CREATED                          OWNER</span><br><span class="line"># busyboxid   17136       running     &#x2F;root&#x2F;bundle   2019-08-04T14:15:11.927965079Z   root</span><br></pre></td></tr></table></div></figure>
+<p>然后再创建bash环境变量，包括了有网络namespace的容器运行时所需要的信息。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export NETCONFPATH&#x3D;&#x2F;opt&#x2F;cni&#x2F;netconfs</span><br><span class="line">export CNI_PATH&#x3D;&#x2F;opt&#x2F;cni&#x2F;bin&#x2F;</span><br><span class="line">export CNI_CONTAINERID&#x3D;busyboxid</span><br><span class="line">export CNI_NETNS&#x3D;&#x2F;var&#x2F;run&#x2F;netns&#x2F;busyboxid</span><br><span class="line">export CNI_IFNAME&#x3D;eth0</span><br><span class="line">export CNI_COMMAND&#x3D;ADD</span><br></pre></td></tr></table></div></figure>
+<p>最后，将调用在stdin中提供可配的conf和上述变量的cni二进制文件。运行时将以JSON格式返回结果。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ cat $NETCONFPATH&#x2F;10-mynet.conf | $CNI_PATH&#x2F;bridge</span><br><span class="line">&#123;</span><br><span class="line">    &quot;cniVersion&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;ip4&quot;: &#123;</span><br><span class="line">        &quot;ip&quot;: &quot;10.10.10.2&#x2F;24&quot;,</span><br><span class="line">        &quot;gateway&quot;: &quot;10.10.10.1&quot;,</span><br><span class="line">        &quot;routes&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;dst&quot;: &quot;0.0.0.0&#x2F;0&quot;,</span><br><span class="line">                &quot;gw&quot;: &quot;10.10.10.1&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;dns&quot;: &#123;</span><br><span class="line">        &quot;nameservers&quot;: [</span><br><span class="line">            &quot;8.8.8.8&quot;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></div></figure>
+<p>最后，可以通过在容器网络空间内运行IP命令来检查网络接口是否已正确设置。</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ ip netns exec busyboxid ip a s eth0</span><br><span class="line">3: eth0@if5: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default</span><br><span class="line">    link&#x2F;ether d6:d6:48:92:b3:25 brd ff:ff:ff:ff:ff:ff link-netnsid 0</span><br><span class="line">    inet 10.10.10.2&#x2F;24 scope global eth0</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 fe80::d4d6:48ff:fe92:b325&#x2F;64 scope link</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">$ ip netns exec busyboxid ip route</span><br><span class="line">default via 10.10.10.1 dev eth0</span><br><span class="line">10.10.10.0&#x2F;24 dev eth0  proto kernel  scope link  src 10.10.10.2</span><br></pre></td></tr></table></div></figure>
+
+<p>删除，只需更改CNI_COMMAND即可：</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">export CNI_COMMAND&#x3D;DEL</span><br><span class="line">cat $NETCONFPATH&#x2F;10-mynet.conf | $CNI_PATH&#x2F;bridge</span><br><span class="line"># no output expected when success</span><br></pre></td></tr></table></div></figure>
+
+        <h2 id="Multi-Interface-情况"   >
+          <a href="#Multi-Interface-情况" class="heading-link"><i class="fas fa-link"></i></a>Multi-Interface 情况</h2>
+      <p>如果需要将容器连接到多个网络，也就是说在容器中可以配置多个网卡，可以通过$netconfpath中的多个网络配置实现。参考如下的shell:</p>
+<figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">export CNI_COMMAND&#x3D;ADD</span><br><span class="line">for conf in $NETCONFPATH&#x2F;*.conf; do</span><br><span class="line">  echo &quot;$&#123;CNI_COMMAND&#125;ing $conf&quot;</span><br><span class="line">  export CNI_IFNAME&#x3D;$(cat $conf | jq -r &#39;.name&#39;)</span><br><span class="line">  plugin&#x3D;$(cat $conf |jq -r &#39;.type&#39;)</span><br><span class="line">  echo &quot;cat $conf | $CNI_PATH&#x2F;$plugin&quot;</span><br><span class="line">  res&#x3D;$(cat $conf | $CNI_PATH&#x2F;$plugin)</span><br><span class="line">  echo $res | jq -r .</span><br><span class="line">done</span><br></pre></td></tr></table></div></figure>
+<p>基本上是对每个网络配置进行循环添加。</p>
+
+        <h2 id="总结"   >
+          <a href="#总结" class="heading-link"><i class="fas fa-link"></i></a>总结</h2>
+      <p>CNI负责了在容器创建或删除期间的所有与网络相关的操作，它将创建所有规则以确保从容器进和出的网络连接正常，但它并不负责设置网络介质，例如创建网桥或分发路由以连接位于不同主机中的容器。CNI的目标是隐藏网络复杂性，以使运行时代码库更干净，同时使第三方提供商能够创建自己的插件，并将它们轻松集成到使用CNI标准的的所有容器编排器中。</p>
+
+        <h2 id="参考"   >
+          <a href="#参考" class="heading-link"><i class="fas fa-link"></i></a>参考</h2>
+      <ol>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="http://www.dasblinkenlichten.com/understanding-cni-container-networking-interface/" >http://www.dasblinkenlichten.com/understanding-cni-container-networking-interface/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+<li><span class="exturl"><a class="exturl__link"   target="_blank" rel="noopener" href="https://jvns.ca/blog/2016/12/22/container-networking/" >https://jvns.ca/blog/2016/12/22/container-networking/</a><span class="exturl__icon"><i class="fas fa-external-link-alt"></i></span></span></li>
+</ol>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://shufanhao.top">Frank 微信公众号 浩运来琳</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://shufanhao.top/posts/f378b788/">https://shufanhao.top/posts/f378b788/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/cloud-native/">cloud native</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/assets/ali_pay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/assets/wechat_pay.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/544375c0/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">vercel建站配置DNS</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/cfd1b897/"><span class="paginator-prev__text">hexo SEO优化</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">
+          前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CNI-%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">
+          CNI 介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E6%97%B6-Container-Runtime-%E4%BB%8B%E7%BB%8D"><span class="toc-number">3.</span> <span class="toc-text">
+          容器运行时(Container Runtime)介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8%E8%BF%90%E8%A1%8C%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8CNI"><span class="toc-number">4.</span> <span class="toc-text">
+          容器运行如何使用CNI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E9%98%B6%E6%AE%B5"><span class="toc-number">4.1.</span> <span class="toc-text">
+          配置阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%B9%E5%99%A8Runtime%E9%98%B6%E6%AE%B5"><span class="toc-number">4.2.</span> <span class="toc-text">
+          容器Runtime阶段</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-Interface-%E6%83%85%E5%86%B5"><span class="toc-number">5.</span> <span class="toc-text">
+          Multi-Interface 情况</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">
+          总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83"><span class="toc-number">7.</span> <span class="toc-text">
+          参考</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/WechatIMG112.jpeg" alt="avatar"></div><p class="sidebar-ov-author__text">越努力，越幸运</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/shufanhao" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2043858835" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="1144825268" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">30</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">11</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">16</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2025</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Frank 微信公众号 浩运来琳</span></div><div><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.2.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://shufanhao.top/posts/f378b788/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://shufanhao.top/posts/f378b788/';
+        this.page.identifier = 'posts/f378b788/';
+        this.page.title = 'Container Runtime 如何用CNI';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://shufanhao-github-io.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://shufanhao-github-io.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.2.0"></script><script src="/js/stun-boot.js?v=2.2.0"></script><script src="/js/scroll.js?v=2.2.0"></script><script src="/js/header.js?v=2.2.0"></script><script src="/js/sidebar.js?v=2.2.0"></script><script type="application/json" src="/search.xml"></script></body></html>

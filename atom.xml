@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Frank&#39;s Blog</title>
+  
+  <subtitle>上天之所以不给你，是因为你要的不够强烈</subtitle>
+  <link href="https://shufanhao.top/atom.xml" rel="self"/>
+  
+  <link href="https://shufanhao.top/"/>
+  <updated>2025-02-15T04:52:28.774Z</updated>
+  <id>https://shufanhao.top/</id>
+  
+  <author>
+    <name>Frank 微信公众号 浩运来琳</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>必看！本地安装 DeepSeek 超详细教程</title>
+    <link href="https://shufanhao.top/posts/4e00340d/"/>
+    <id>https://shufanhao.top/posts/4e00340d/</id>
+    <published>2025-02-15T04:45:39.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;DeepSeek最近还是很火，直接把港股带飞。以至于问个问题给DeepSeek, 经常遇到服务器异常繁忙，请稍后尝试。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="AI" scheme="https://shufanhao.top/categories/AI/"/>
+    
+    
+    <category term="AI" scheme="https://shufanhao.top/tags/AI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>为什么精英都是时间控 -- 读书笔记</title>
+    <link href="https://shufanhao.top/posts/f652151a/"/>
+    <id>https://shufanhao.top/posts/f652151a/</id>
+    <published>2024-12-01T15:07:45.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;通过正确的做法提高自己的专注力，排除杂念，提高效率。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+    <category term="study" scheme="https://shufanhao.top/tags/study/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP/HTTPS Testing Magic Tool GO-VCR</title>
+    <link href="https://shufanhao.top/posts/9e3eb236/"/>
+    <id>https://shufanhao.top/posts/9e3eb236/</id>
+    <published>2024-06-08T07:58:17.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;When developing applications that rely on external APIs, testing can become a challenge. You want your tests to be reliable, fast, and not dependent on the availability or performance of third-party services. Enter go-vcr, a fantastic tool that makes HTTP/HTTPS testing straightforward and efficient. In this blog post, we’ll explore what go-vcr is, why you should use it, and how it works.&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="go" scheme="https://shufanhao.top/categories/go/"/>
+    
+    
+    <category term="go" scheme="https://shufanhao.top/tags/go/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>认知觉醒：开启自我改变的原动力-- 读书笔记</title>
+    <link href="https://shufanhao.top/posts/fa70c6fa/"/>
+    <id>https://shufanhao.top/posts/fa70c6fa/</id>
+    <published>2024-04-06T08:53:00.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;早冥读写跑，人生五件套，不断提高自己的元认知能力。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+    <category term="study" scheme="https://shufanhao.top/tags/study/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>俞敏洪 我曾走在崩溃的边缘 -- 读书笔记</title>
+    <link href="https://shufanhao.top/posts/ee1f9a56/"/>
+    <id>https://shufanhao.top/posts/ee1f9a56/</id>
+    <published>2024-03-10T03:32:41.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;读完这本书后，启发很大，尤其说的只要坚持做正确的事情，好的结果自然会来。人生就是一场马拉松，起起伏伏很正常，关键是要坚持做正确的事情，从绝望中寻找希望。这本书，是在微信阅读app上阅读的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一文搞定通过UTM 在MAC M1上安装Win11</title>
+    <link href="https://shufanhao.top/posts/fffdf12c/"/>
+    <id>https://shufanhao.top/posts/fffdf12c/</id>
+    <published>2024-01-07T13:55:16.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why&quot;&gt;&lt;/a&gt;Why&lt;/h2&gt;&lt;p&gt;临近过年，一年一度的抢票大战就要开始。抢票软件要求安装在windows，作为mac资深用户，必须安装个windows虚拟机。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="MacOS" scheme="https://shufanhao.top/categories/MacOS/"/>
+    
+    <category term="tools" scheme="https://shufanhao.top/categories/MacOS/tools/"/>
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/tags/tools/"/>
+    
+    <category term="MacOS" scheme="https://shufanhao.top/tags/MacOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>美国生活经济学 -- 读书笔记</title>
+    <link href="https://shufanhao.top/posts/6c817f2/"/>
+    <id>https://shufanhao.top/posts/6c817f2/</id>
+    <published>2023-10-28T13:41:44.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;一直听朋友同事讲，美国生活的制度，自己本身没有接触过，所以也特别好奇和中国的与众不同，以及为什么这么多人移民美国，读完这本书后，会有一个更深刻的认识。本书是在微信阅读app上阅读的。&lt;/p&gt;
+&lt;p&gt;出国的目的本就不该纯粹是为了赚钱（如果单为赚钱的话，去非洲、东南亚赚大钱的机会比欧美要多得多，国内前20年更多。出国的目的，就是在人生旅途中看不同的风景，享受的是精彩的过程。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Understanding Cascade Left Joins and Writing Complex Queries</title>
+    <link href="https://shufanhao.top/posts/e674a0bc/"/>
+    <id>https://shufanhao.top/posts/e674a0bc/</id>
+    <published>2023-07-15T00:44:30.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;In SQL, the left join is a powerful tool for combining data from multiple tables based on a common column. In this blog post, we will explore the concept of cascade left joins, providing clear explanations and examples to help you grasp this important technique. Additionally, we will delve into writing complex queries, enabling you to tackle more advanced data retrieval tasks with confidence. &lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="sql" scheme="https://shufanhao.top/categories/sql/"/>
+    
+    
+    <category term="sql" scheme="https://shufanhao.top/tags/sql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>编写可读代码的艺术--读书笔记</title>
+    <link href="https://shufanhao.top/posts/6dbdfda/"/>
+    <id>https://shufanhao.top/posts/6dbdfda/</id>
+    <published>2023-04-01T14:38:26.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;本书作者重点强调了代码的可读性对于软件开发的重要性，并提供了许多实用的建议和技巧，以帮助读者编写更加易于理解和维护的代码。此外，作者还提供了一些常见的代码陷阱和错误，并指出如何避免这些问题。&lt;/p&gt;
+&lt;/blockquote&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+    <category term="code" scheme="https://shufanhao.top/tags/code/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MAC M1重启后自动启动虚拟机</title>
+    <link href="https://shufanhao.top/posts/17bf4594/"/>
+    <id>https://shufanhao.top/posts/17bf4594/</id>
+    <published>2023-02-05T02:42:26.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why&quot;&gt;&lt;/a&gt;Why&lt;/h2&gt;&lt;p&gt;笔者在M1通过UTM setup了一个虚拟机，虚拟机开机的时候会自动启动我设置的服务，那如何让M1重启后自动启动虚拟机呢？ &lt;/p&gt;</summary>
+    
+    
+    
+    <category term="MacOS" scheme="https://shufanhao.top/categories/MacOS/"/>
+    
+    <category term="tools" scheme="https://shufanhao.top/categories/MacOS/tools/"/>
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/tags/tools/"/>
+    
+    <category term="MacOS" scheme="https://shufanhao.top/tags/MacOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>在运行在M1的ubuntu虚拟机上安装Mediawiki</title>
+    <link href="https://shufanhao.top/posts/d8b155f3/"/>
+    <id>https://shufanhao.top/posts/d8b155f3/</id>
+    <published>2023-02-05T02:40:03.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;Why&quot;&gt;&lt;a href=&quot;#Why&quot; class=&quot;headerlink&quot; title=&quot;Why&quot;&gt;&lt;/a&gt;Why&lt;/h2&gt;&lt;p&gt;最近开始转向arm架构的M1 Macbook了，不得不说M1的续航，性能确实用起来很丝滑。之前在x86上安装的虚拟机以及虚拟机上安装的mediawiki都要迁移到M1上。&lt;/p&gt;
+&lt;p&gt;因为底层系统架构从x86到ARM，所以之前的虚拟机不能在M1上直接用，并且docker image也必须用arm64版本的，一切都要从头开始。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="MacOS" scheme="https://shufanhao.top/categories/MacOS/"/>
+    
+    <category term="tools" scheme="https://shufanhao.top/categories/MacOS/tools/"/>
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/tags/tools/"/>
+    
+    <category term="MacOS" scheme="https://shufanhao.top/tags/MacOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Go语言精进之路--读书笔记</title>
+    <link href="https://shufanhao.top/posts/acfd0598/"/>
+    <id>https://shufanhao.top/posts/acfd0598/</id>
+    <published>2023-01-12T09:32:30.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;主要是摘取书中，个人感觉比较重要的内容。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;第一部分-熟知Go的一切&quot;&gt;&lt;a href=&quot;#第一部分-熟知Go的一切&quot; class=&quot;headerlink&quot; title=&quot;第一部分 熟知Go的一切&quot;&gt;&lt;/a&gt;第一部分 熟知Go的一切&lt;/h2&gt;&lt;h3 id=&quot;理解Go的设计哲学&quot;&gt;&lt;a href=&quot;#理解Go的设计哲学&quot; class=&quot;headerlink&quot; title=&quot;理解Go的设计哲学&quot;&gt;&lt;/a&gt;理解Go的设计哲学&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;追去简单，少就是多&lt;/strong&gt;。Go设计者推崇最简单方式思维，事情仅有一种或者尽可能少的方式去完成。Go的复杂性被go设计者所隐藏。比方：通过大小写来说明是不是要暴露接口。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;水平和垂直组合&lt;/strong&gt;。接口与实现之间隐士关联，包之间是相互独立的，没有子包概念。通过类型嵌入，快速让一个新类型复用其他类型已经实现的能力，实现功能&lt;strong&gt;垂直扩展&lt;/strong&gt;。这似乎是其他语言没有实现的功能点。例子：</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+    <category term="golang" scheme="https://shufanhao.top/tags/golang/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Tinyproxy搭建自己的proxy server</title>
+    <link href="https://shufanhao.top/posts/32acde64/"/>
+    <id>https://shufanhao.top/posts/32acde64/</id>
+    <published>2022-12-03T15:35:57.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;What-is-Tinyproxy&quot;&gt;&lt;a href=&quot;#What-is-Tinyproxy&quot; class=&quot;headerlink&quot; title=&quot;What is Tinyproxy&quot;&gt;&lt;/a&gt;What is Tinyproxy&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://tinyproxy.github.io/&quot;&gt;Tinyproxy&lt;/a&gt; 是一个轻量级，跨平台，开源的，同时支持http/https两种方式代理。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/categories/tools/"/>
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Tableau 入门系列之各种图形绘制</title>
+    <link href="https://shufanhao.top/posts/1324e406/"/>
+    <id>https://shufanhao.top/posts/1324e406/</id>
+    <published>2022-12-01T15:19:27.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;h2 id=&quot;What&quot;&gt;&lt;a href=&quot;#What&quot; class=&quot;headerlink&quot; title=&quot;What&quot;&gt;&lt;/a&gt;What&lt;/h2&gt;&lt;p&gt;Tableau 是一个可视化分析平台，它改变了我们使用数据解决问题的方式，使个人和组织能够充分利用自己的数据。&lt;/p&gt;
+&lt;p&gt;Tableau提供了非常丰富的图表，通过及其强大的功能，使得数据的可视化极其容易。Tableau，至少是我遇到最强大的可视化平台。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/categories/BigData/"/>
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/tags/BigData/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一文搞定通过UTM 在MAC M1上安装centos/ubuntu VM</title>
+    <link href="https://shufanhao.top/posts/fc62d617/"/>
+    <id>https://shufanhao.top/posts/fc62d617/</id>
+    <published>2022-11-03T07:04:23.000Z</published>
+    <updated>2025-02-15T04:52:28.774Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;@&lt;a href=&quot;%E7%9B%AE%E5%BD%95&quot;&gt;TOC&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;自从买入Macbook M1 之后，在MAC上安装centos/ununtu 虚拟机一直是想尝试的事情。&lt;/p&gt;
+&lt;p&gt;最近，virtualbox 的最新的beta 版本说是已经支持在m1上运行，结果今天测试了一下发现并不work。&lt;/p&gt;
+&lt;p&gt;然后就折腾其他方案，终于work了。本文描述的是通过UTM + centos9/ubuntu 实现在Mac M1上启动centos VM。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="MacOS" scheme="https://shufanhao.top/categories/MacOS/"/>
+    
+    <category term="tools" scheme="https://shufanhao.top/categories/MacOS/tools/"/>
+    
+    
+    <category term="tools" scheme="https://shufanhao.top/tags/tools/"/>
+    
+    <category term="MacOS" scheme="https://shufanhao.top/tags/MacOS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据入门之Presto/Trino</title>
+    <link href="https://shufanhao.top/posts/83d3434a/"/>
+    <id>https://shufanhao.top/posts/83d3434a/</id>
+    <published>2022-10-05T08:05:33.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Presto/Trino：是用来高速，实时，跨源的数据查询。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/categories/BigData/"/>
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/tags/BigData/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据入门之Sqoop</title>
+    <link href="https://shufanhao.top/posts/2c84cdcc/"/>
+    <id>https://shufanhao.top/posts/2c84cdcc/</id>
+    <published>2022-10-05T07:26:42.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Sqoop：解决的问题是提供了传统数据库和Hadoop之间转换的方案。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/categories/BigData/"/>
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/tags/BigData/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数据入门之 Hadoop,HDFS,Hbase,Hive</title>
+    <link href="https://shufanhao.top/posts/1c5fdd96/"/>
+    <id>https://shufanhao.top/posts/1c5fdd96/</id>
+    <published>2022-10-03T15:03:36.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;经常听到这些大数据的名词, Hadoop,HDFS,Hbase,Hive等，这次就一探究竟。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hadoop：是泛指大数据生态，实际上基本包括 存储(HDFS) + 计算(MapReduce);&lt;/li&gt;
+&lt;li&gt;HDFS: Hadoop分布式文件系统，主要是解决存储的问题;&lt;/li&gt;
+&lt;li&gt;Hbase: 基于Hadoop的高性能nosql数据库;&lt;/li&gt;
+&lt;li&gt;Hive: 最常用的数据仓库;</summary>
+    
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/categories/BigData/"/>
+    
+    
+    <category term="BigData" scheme="https://shufanhao.top/tags/BigData/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>思考的技术-读书笔记</title>
+    <link href="https://shufanhao.top/posts/b4ecdf1b/"/>
+    <id>https://shufanhao.top/posts/b4ecdf1b/</id>
+    <published>2022-09-18T13:43:23.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;全书在描述 摆事实，讲道理，逻辑打动人心。这本书是在2009年写的，但不得不说，当时作者对未来的预测是非常准确的。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>宏观经济学通识课--读书笔记</title>
+    <link href="https://shufanhao.top/posts/34694fad/"/>
+    <id>https://shufanhao.top/posts/34694fad/</id>
+    <published>2022-09-04T15:16:00.000Z</published>
+    <updated>2025-02-15T04:52:28.773Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;学习宏观知识，是为了能更好的理解政府的政策，全球的地缘政治和全球其他国家的尤其是美国的经济政策。通过政策，是如何影响市场。&lt;/p&gt;</summary>
+    
+    
+    
+    <category term="book" scheme="https://shufanhao.top/categories/book/"/>
+    
+    
+    <category term="book" scheme="https://shufanhao.top/tags/book/"/>
+    
+    <category term="economy" scheme="https://shufanhao.top/tags/economy/"/>
+    
+  </entry>
+  
+</feed>

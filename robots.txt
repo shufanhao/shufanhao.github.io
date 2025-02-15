@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://shufanhao.top/sitemap.xml
+Sitemap: https://shufanhao.top/baidusitemap.xml
