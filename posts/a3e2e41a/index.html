@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/jiqiren-16x16.svg?v=2.2.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/jiqiren-32x32.svg?v=2.2.0" type="image/png" sizes="32x32"><meta name="google-site-verification" content="36z2JWLXgmHzuSp23WuqFEQMXfAhw7XD-Pe-rJtCpI0"><meta name="baidu-site-verification" content="code-q9cCzVTEA7"><meta name="description" content="引言：从阿基米德的支点说起“给我一个支点，我就能撬动整个地球。” 公元前三世纪，古希腊物理学家阿基米德在发现了杠杆原理后，发出了这样一句豪言壮语。杠杆的本质，是以小博大，是用极小的投入换取巨大的产出。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI为什么是普通人的杠杆？">
+<meta property="og:url" content="https://shufanhao.top/posts/a3e2e41a/index.html">
+<meta property="og:site_name" content="Frank&#39;s Blog">
+<meta property="og:description" content="引言：从阿基米德的支点说起“给我一个支点，我就能撬动整个地球。” 公元前三世纪，古希腊物理学家阿基米德在发现了杠杆原理后，发出了这样一句豪言壮语。杠杆的本质，是以小博大，是用极小的投入换取巨大的产出。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_leverage/cover.png">
+<meta property="article:published_time" content="2026-04-05T02:00:00.000Z">
+<meta property="article:modified_time" content="2026-04-12T02:52:59.951Z">
+<meta property="article:author" content="Frank 微信公众号 浩运来琳">
+<meta property="article:tag" content="AI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shufanhao.top/assets/ai_leverage/cover.png"><title>AI为什么是普通人的杠杆？ | Frank's Blog</title><link ref="canonical" href="https://shufanhao.top/posts/a3e2e41a/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.2.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Frank's Blog" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/book/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">书籍</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Frank's Blog</div><div class="header-banner-info__subtitle">上天之所以不给你，是因为你要的不够强烈</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">AI为什么是普通人的杠杆？</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2026-04-05</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2026-04-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.6k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">8分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body">
+        <h2 id="引言：从阿基米德的支点说起"   >
+          <a href="#引言：从阿基米德的支点说起" class="heading-link"><i class="fas fa-link"></i></a>引言：从阿基米德的支点说起</h2>
+      <p>“给我一个支点，我就能撬动整个地球。”</p>
+<p>公元前三世纪，古希腊物理学家阿基米德在发现了杠杆原理后，发出了这样一句豪言壮语。杠杆的本质，是<strong>以小博大</strong>，是用极小的投入换取巨大的产出。</p>
+<a id="more"></a>
+
+<p>在人类几千年的发展史中，杠杆的形态不断演变：从物理世界的滑轮与撬棍，到工业时代的蒸汽机，再到金融时代的资本与信贷。然而，这些杠杆要么依赖天赋，要么依赖资源，普通人想要获得并驾驭它们，门槛极高。</p>
+<p>直到今天，人工智能（AI）的爆发，为普通人送上了一根前所未有的、极其普惠的“超级杠杆”。</p>
+<p>为什么说 AI 是普通人的杠杆？因为这是历史上第一次，<strong>个体的边界不再受限于自身的技能存量和时间精力，而是取决于其思考的深度与提问的能力</strong>。</p>
+<p><img src="/assets/ai_leverage/cover.png" alt="封面图"></p>
+<hr>
+
+        <h2 id="认知杠杆：打破知识与信息的壁垒"   >
+          <a href="#认知杠杆：打破知识与信息的壁垒" class="heading-link"><i class="fas fa-link"></i></a>认知杠杆：打破知识与信息的壁垒</h2>
+      <p>过去，知识是有门槛的。</p>
+<p>你想学习一门小语种，你需要报班；你想了解复杂的税务筹划，你需要聘请律师和会计师；你想开发一个软件，你需要经历漫长而痛苦的编程学习过程。专家阶层和精英群体依靠长期的学习和资源积累，建立起了高耸的认知壁垒，而普通人往往只能被挡在门外。</p>
+<p><strong>AI 则是推倒这面高墙的推土机。</strong></p>
+<p>现在，面对任何一个陌生的领域，你只需要向 AI 提出一个好问题。AI 能够在一个对话框内，将人类积累了几千年的结构化知识，进行压缩、提炼，并以你能够理解的方式呈现出来。</p>
+<ul>
+<li><strong>快速学习能力：</strong> 面对厚达几百页的行业报告或者晦涩难懂的学术论文，你可以直接丢给大模型，让它在十秒钟内为你总结出核心要点。</li>
+<li><strong>降维跨界：</strong> 一个不懂金融的文科生，可以借助 AI 理解复杂的财务报表；一个不懂代码的业务人员，可以在 AI 的指导下写出爬虫脚本获取市场数据。</li>
+</ul>
+<p>AI 作为认知杠杆，将“获取知识的成本”无限趋近于零。它不再要求你拥有过目不忘的记忆力，而是奖励那些拥有好奇心、批判性思维以及“知道如何提问”的人。</p>
+<hr>
+
+        <h2 id="技能杠杆：从“流水线螺丝钉”到“超级个体”"   >
+          <a href="#技能杠杆：从“流水线螺丝钉”到“超级个体”" class="heading-link"><i class="fas fa-link"></i></a>技能杠杆：从“流水线螺丝钉”到“超级个体”</h2>
+      <p>工业时代的逻辑是精细化分工。一个人被训练成某种特定技能的专家（比如文案、设计、开发或财务），然后镶嵌在庞大企业组织的齿轮中，成为一枚无法窥见全貌的螺丝钉。</p>
+<p>但是，AI 正在瓦解这种旧范式。<strong>借助 AI，普通人获得了成为“全栈人才”甚至“一家公司”的能力。</strong></p>
+<p>我们来看看现在普通人能用 AI 做到什么：</p>
+<ul>
+<li><strong>文案与策划：</strong> 告诉大模型你的产品卖点，它能在几秒内生成十个不同风格的公众号标题、小红书种草文案或者短视频脚本。</li>
+<li><strong>视觉设计：</strong> 不会用 Photoshop？没关系。Midjourney 和 Stable Diffusion 能根据你的文字描述，直接生成商业级的高清插画、海报甚至是产品原型图。</li>
+<li><strong>代码与开发：</strong> 借助 Cursor 或者 GitHub Copilot，即使你只是半路出家的编程小白，也能在 AI 的辅助下独立完成一个网页应用、一款微信小程序或者一个自动化的工作流脚本。</li>
+</ul>
+<p><strong>一个人，就是一个团队（One-Person Company）。</strong></p>
+<p>你不再需要去组建一支包含策划、设计、开发的团队才能去验证一个商业想法。AI 赋予了你“一人成军”的技能杠杆，让普通人可以跳出分工的局限，从“执行者”进化为“导演”和“产品经理”。</p>
+<hr>
+
+        <h2 id="时间杠杆：把枯燥留给机器，把创造留给自己"   >
+          <a href="#时间杠杆：把枯燥留给机器，把创造留给自己" class="heading-link"><i class="fas fa-link"></i></a>时间杠杆：把枯燥留给机器，把创造留给自己</h2>
+      <p>时间，是世界上最公平也最残酷的资源。每个人每天都只有 24 小时。</p>
+<p>普通人常常陷入一种困境：大部分的时间被重复性、低价值的劳动（例如整理表格、回复常规邮件、录入数据）所占据，导致没有精力去进行深度思考、学习新技能或者陪伴家人。</p>
+<p>引入 AI 作为时间杠杆，意味着<strong>将你从机械的苦力劳动中解放出来</strong>。</p>
+<ul>
+<li>它可以帮你自动整理长达一小时的会议录音，并生成带有待办事项的会议纪要。</li>
+<li>它可以帮你一键翻译并校对上万字的外文文献。</li>
+<li>它可以帮你批量处理 Excel 中的凌乱数据，甚至自动生成可视化图表。</li>
+</ul>
+<p>当机器接管了执行层的脏活累活，你的时间就可以被投资到<strong>具有复利效应</strong>的事情上：比如洞察用户需求、优化商业模式、建立人际连接，甚至是享受生活本身。</p>
+<p>时间杠杆的意义不在于让你成为一台永不疲倦的机器，而在于<strong>让你重新获得作为“人”的自由和尊严</strong>。</p>
+<hr>
+
+        <h2 id="结语：做驾驭工具的人"   >
+          <a href="#结语：做驾驭工具的人" class="heading-link"><i class="fas fa-link"></i></a>结语：做驾驭工具的人</h2>
+      <p>水能载舟，亦能覆舟。</p>
+<p>面对 AI 浪潮，有人感到恐慌，担心自己被取代；而有人则感到兴奋，因为他们看到了破局的希望。</p>
+<p>AI 就像是一把削铁如泥的宝剑，它本身没有意志，关键在于握剑的人。<strong>AI 不会淘汰普通人，但“会使用 AI 的人”一定会淘汰“不会使用 AI 的人”。</strong></p>
+<p>如果你依然固守着传统的思维模式，把 AI 当作一个高级一点的搜索引擎，那么它对你来说毫无意义。<br>但如果你把 AI 当作你的导师、你的外脑、你的员工、你的<strong>人生杠杆</strong>，学会如何给它下指令，如何与它协作，你就能撬动属于你自己的未来。</p>
+<p>支点已经就位，杠杆已经交到你的手中。<br>接下来，就看你想撬起多大的世界了。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://shufanhao.top">Frank 微信公众号 浩运来琳</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://shufanhao.top/posts/a3e2e41a/">https://shufanhao.top/posts/a3e2e41a/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/AI/">AI</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/assets/ali_pay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/assets/wechat_pay.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/ba2eb66f/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">让 Claude Code 变乖：我为什么给 AI 编程助手加了层「Harness」</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/755b25eb/"><span class="paginator-prev__text">告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%95%E8%A8%80%EF%BC%9A%E4%BB%8E%E9%98%BF%E5%9F%BA%E7%B1%B3%E5%BE%B7%E7%9A%84%E6%94%AF%E7%82%B9%E8%AF%B4%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">
+          引言：从阿基米德的支点说起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A4%E7%9F%A5%E6%9D%A0%E6%9D%86%EF%BC%9A%E6%89%93%E7%A0%B4%E7%9F%A5%E8%AF%86%E4%B8%8E%E4%BF%A1%E6%81%AF%E7%9A%84%E5%A3%81%E5%9E%92"><span class="toc-number">2.</span> <span class="toc-text">
+          认知杠杆：打破知识与信息的壁垒</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E8%83%BD%E6%9D%A0%E6%9D%86%EF%BC%9A%E4%BB%8E%E2%80%9C%E6%B5%81%E6%B0%B4%E7%BA%BF%E8%9E%BA%E4%B8%9D%E9%92%89%E2%80%9D%E5%88%B0%E2%80%9C%E8%B6%85%E7%BA%A7%E4%B8%AA%E4%BD%93%E2%80%9D"><span class="toc-number">3.</span> <span class="toc-text">
+          技能杠杆：从“流水线螺丝钉”到“超级个体”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%B6%E9%97%B4%E6%9D%A0%E6%9D%86%EF%BC%9A%E6%8A%8A%E6%9E%AF%E7%87%A5%E7%95%99%E7%BB%99%E6%9C%BA%E5%99%A8%EF%BC%8C%E6%8A%8A%E5%88%9B%E9%80%A0%E7%95%99%E7%BB%99%E8%87%AA%E5%B7%B1"><span class="toc-number">4.</span> <span class="toc-text">
+          时间杠杆：把枯燥留给机器，把创造留给自己</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AF%AD%EF%BC%9A%E5%81%9A%E9%A9%BE%E9%A9%AD%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BA%BA"><span class="toc-number">5.</span> <span class="toc-text">
+          结语：做驾驭工具的人</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/WechatIMG112.jpeg" alt="avatar"></div><p class="sidebar-ov-author__text">越努力，越幸运</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/shufanhao" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2043858835" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="1144825268" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">15</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">27</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2026</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Frank 微信公众号 浩运来琳</span></div><div><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.2.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://shufanhao.top/posts/a3e2e41a/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://shufanhao.top/posts/a3e2e41a/';
+        this.page.identifier = 'posts/a3e2e41a/';
+        this.page.title = 'AI为什么是普通人的杠杆？';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://shufanhao-github-io.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://shufanhao-github-io.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.2.0"></script><script src="/js/stun-boot.js?v=2.2.0"></script><script src="/js/scroll.js?v=2.2.0"></script><script src="/js/header.js?v=2.2.0"></script><script src="/js/sidebar.js?v=2.2.0"></script><script type="application/json" src="/search.xml"></script></body></html>

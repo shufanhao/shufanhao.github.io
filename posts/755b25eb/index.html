@@ -1,0 +1,530 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/jiqiren-16x16.svg?v=2.2.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/jiqiren-32x32.svg?v=2.2.0" type="image/png" sizes="32x32"><meta name="google-site-verification" content="36z2JWLXgmHzuSp23WuqFEQMXfAhw7XD-Pe-rJtCpI0"><meta name="baidu-site-verification" content="code-q9cCzVTEA7"><meta name="description" content="AI 技术的发展日新月异，每天都有新的应用和工具诞生。但当我们想要深入了解或使用这些 AI 工具时，往往会被一堆英文专业术语劝退：Token 是什么？Prompt 怎么写？Context 为什么那么贵？最近大火的 Agent 和 MCP 又是个啥？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券">
+<meta property="og:url" content="https://shufanhao.top/posts/755b25eb/index.html">
+<meta property="og:site_name" content="Frank&#39;s Blog">
+<meta property="og:description" content="AI 技术的发展日新月异，每天都有新的应用和工具诞生。但当我们想要深入了解或使用这些 AI 工具时，往往会被一堆英文专业术语劝退：Token 是什么？Prompt 怎么写？Context 为什么那么贵？最近大火的 Agent 和 MCP 又是个啥？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/token.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/prompt.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/context.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/skills.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/agent.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/mcp.png">
+<meta property="og:image" content="https://shufanhao.top/assets/ai_terms/concept_diagram.png">
+<meta property="article:published_time" content="2026-04-04T08:47:06.000Z">
+<meta property="article:modified_time" content="2026-04-12T02:52:59.951Z">
+<meta property="article:author" content="Frank 微信公众号 浩运来琳">
+<meta property="article:tag" content="ai">
+<meta property="article:tag" content="tech">
+<meta property="article:tag" content="prompt">
+<meta property="article:tag" content="agent">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://shufanhao.top/assets/ai_terms/token.png"><title>告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券 | Frank's Blog</title><link ref="canonical" href="https://shufanhao.top/posts/755b25eb/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.2.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Frank's Blog" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/book/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">书籍</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Frank's Blog</div><div class="header-banner-info__subtitle">上天之所以不给你，是因为你要的不够强烈</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2026-04-04</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2026-04-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">2.2k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">12分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><p>AI 技术的发展日新月异，每天都有新的应用和工具诞生。但当我们想要深入了解或使用这些 AI 工具时，往往会被一堆英文专业术语劝退：Token 是什么？Prompt 怎么写？Context 为什么那么贵？最近大火的 Agent 和 MCP 又是个啥？</p>
+<a id="more"></a>
+
+<p>AI 技术的发展日新月异，每天都有新的应用和工具诞生。但当我们想要深入了解或使用这些 AI 工具时，往往会被一堆英文专业术语劝退：Token 是什么？Prompt 怎么写？Context 为什么那么贵？最近大火的 Agent 和 MCP 又是个啥？</p>
+<p>别慌，这篇文章将用最通俗易懂的语言，结合生活中的生动比喻，带你一次性弄懂 AI 领域最核心的几个关键概念。读完这篇，你也能成为半个“AI 圈内人”。</p>
+
+        <h2 id="1-Token：AI-眼中的“字”与“词”"   >
+          <a href="#1-Token：AI-眼中的“字”与“词”" class="heading-link"><i class="fas fa-link"></i></a>1. Token：AI 眼中的“字”与“词”</h2>
+      <p><img src="/assets/ai_terms/token.png" alt="Token图解"></p>
+<p>在人类眼里，一篇文章是由一段段话组成的，话是由一个个词和字组成的。但在 AI 的眼里，文本的最小单位叫做 <strong>Token</strong>。</p>
+<p>你可以把 Token 理解为 AI 消化信息的“一口饭”。有时候这一口是一个完整的词（比如 “Apple”），有时候是一个字（比如 “苹”），有时候甚至只是一个字母或词根。</p>
+<p><strong>举个例子</strong>：<br>英文单词 “Hamburger”（汉堡包），在 AI 眼里可能会被拆分成 “Ham”、”bur”、”ger” 3个 Token。<br>而在中文里，通常一个汉字就是一个或多个 Token。</p>
+<p><strong>为什么我们需要关心 Token？</strong><br>因为在 AI 的世界里，<strong>Token 就是钱</strong>。不论是你向 AI 提问（输入），还是 AI 给你回答（输出），背后的大模型厂商都是按 Token 的数量来计费的。通常大家常说的“百万 Token 只要 XX 元”，就是在衡量这个模型的性价比。</p>
+
+        <h2 id="2-Prompt（提示词）：你给-AI-下的“咒语”"   >
+          <a href="#2-Prompt（提示词）：你给-AI-下的“咒语”" class="heading-link"><i class="fas fa-link"></i></a>2. Prompt（提示词）：你给 AI 下的“咒语”</h2>
+      <p><img src="/assets/ai_terms/prompt.png" alt="Prompt图解"></p>
+<p><strong>Prompt</strong> 的字面意思是“提示”，在 AI 领域，它就是你对 AI 说的话，是你下达的指令。</p>
+<p>你可以把大模型想象成一个无所不知但没有任何主动性的“超级学霸”。你不问，他不说；你问得越精准，他回答得越完美。这个“问”的过程，就是写 Prompt。</p>
+<p><strong>好的 Prompt 长什么样？</strong></p>
+<ul>
+<li>❌ <strong>差的 Prompt</strong>：“帮我写个请假条。”（AI 会给你一个非常干瘪、套路化的模板）</li>
+<li>✅ <strong>好的 Prompt</strong>：“你现在是一个有着 10 年职场经验的 HR。请帮我写一封给老板的请假条，原因是我要去做个小手术需要休息一周。语气要委婉、诚恳，同时表明我已经把手头的工作交接给了同事小李。”（AI 会给你一份完美得可以直接发送的请假条）</li>
+</ul>
+<p>写 Prompt 就像是念咒语，你的咒语越清晰、越包含丰富的上下文和约束条件，AI 展现出的“魔法”就越强大。</p>
+
+        <h2 id="3-Context（上下文）与-Context-Window（上下文窗口）"   >
+          <a href="#3-Context（上下文）与-Context-Window（上下文窗口）" class="heading-link"><i class="fas fa-link"></i></a>3. Context（上下文）与 Context Window（上下文窗口）</h2>
+      <p><img src="/assets/ai_terms/context.png" alt="Context图解"></p>
+<p>和人类聊天时，我们能记住对方上一句甚至昨天说了什么，这叫“记忆”。对于 AI 来说，它的“短期记忆”就是 <strong>Context（上下文）</strong>。</p>
+<p>当你和 AI 开启一段新的对话时，AI 其实是一个失忆状态。为了让它能顺着你的话往下聊，系统会在每次你发送新消息时，把你之前聊过的所有记录（Context）打包，连同你的新问题一起发给 AI。</p>
+<p><strong>那什么是 Context Window（上下文窗口）呢？</strong><br>你可以把它理解为 AI 的“脑容量”或者“内存大小”。AI 无法无限量地接收信息，它一次能处理的最大 Token 数量，就是它的上下文窗口。</p>
+<ul>
+<li>以前的模型窗口很小，只有 4K（大约几千字），你发一篇长文给它，它看了后面就忘了前面。</li>
+<li>现在的模型越来越强大，比如 Claude 3.5 Sonnet 支持 200K 窗口（能读完好几本厚书），Gemini 甚至支持 100 万到 200 万 Token 的超大窗口。</li>
+</ul>
+<p><strong>大窗口意味着什么？</strong> 你可以直接把一整本财报、一整个代码库丢给 AI，让它帮你总结和分析。</p>
+
+        <h2 id="4-Skills（技能）：给-AI-装上手脚"   >
+          <a href="#4-Skills（技能）：给-AI-装上手脚" class="heading-link"><i class="fas fa-link"></i></a>4. Skills（技能）：给 AI 装上手脚</h2>
+      <p><img src="/assets/ai_terms/skills.png" alt="Skills图解"></p>
+<p>大模型本身只是一个超级大脑，它被困在服务器里，没有手脚，不能上网，不能点外卖，也不能帮你发微信。</p>
+<p>为了让 AI 真正成为能干活的助手，我们需要给它配备 <strong>Skills（技能）</strong>。</p>
+<ul>
+<li><strong>Skill（技能）</strong>：就像是给 AI 提供的一套工具箱。比如“联网搜索”是一个技能，“生成图片”是一个技能，“读写本地文件”也是一个技能。有了技能，AI 就知道在遇到特定问题时，可以主动去调用相应的工具来获取信息或执行操作。</li>
+</ul>
+
+        <h2 id="5-Agent（智能体）：拥有自主意识的“数字员工”"   >
+          <a href="#5-Agent（智能体）：拥有自主意识的“数字员工”" class="heading-link"><i class="fas fa-link"></i></a>5. Agent（智能体）：拥有自主意识的“数字员工”</h2>
+      <p><img src="/assets/ai_terms/agent.png" alt="Agent图解"></p>
+<p>如果说拥有了 Skills 的 AI 只是学会了使用工具，那么 <strong>Agent（智能体）</strong> 则是拥有了自主规划和执行能力的“数字员工”。</p>
+<ul>
+<li><strong>普通的 AI（有技能）</strong>：你发指令“帮我用搜索引擎查一下明天的天气”，它去查了告诉你。</li>
+<li><strong>Agent（智能体）</strong>：你只给一个大目标“帮我策划一场去日本的旅行并订好机票酒店”，它会自己思考步骤。它会<strong>主动决定</strong>先调用搜索技能查航班，再调用计算技能做预算，最后调用排版技能生成一份完美的行程单，甚至自动调用 API 帮你把票买了。</li>
+</ul>
+<p>Agent 的核心在于它具备了<strong>思考、规划、纠错</strong>的能力，它能自主决定每一步该怎么走，这是 AI 走向 AGI（通用人工智能）的重要一步。</p>
+
+        <h2 id="6-MCP（模型上下文协议）：AI-时代的“USB-接口”"   >
+          <a href="#6-MCP（模型上下文协议）：AI-时代的“USB-接口”" class="heading-link"><i class="fas fa-link"></i></a>6. MCP（模型上下文协议）：AI 时代的“USB 接口”</h2>
+      <p><img src="/assets/ai_terms/mcp.png" alt="MCP图解"></p>
+<p>这是最近在开发者圈子里爆火的一个新词：<strong>Model Context Protocol（MCP）</strong>。</p>
+<p>想象一下，在 USB 接口发明之前，电脑想连接鼠标、键盘、打印机，每种设备都要专门定制一个奇怪的接口，非常麻烦。<br>目前的 AI 工具就处于这个阶段：各种大模型想读取你本地的数据库、访问你的 Github、看你的 Notion 笔记，都需要开发者写大量定制化的代码。</p>
+<p><strong>MCP 就是 AI 界的 USB 接口标准。</strong><br>它由 Anthropic（开发 Claude 的公司）推出。有了 MCP，任何数据源（本地文件、数据库、企业内部系统）只要套上这个“USB 接口”，任何支持 MCP 的 AI 模型（比如 Claude 桌面版）就能直接读取和操作这些数据。</p>
+<p>这意味着，AI 从一个孤立的聊天机器人，彻底变成了一个能无缝融入你所有工作流的超级助理。</p>
+
+        <h2 id="其他经常遇到的“高频词”"   >
+          <a href="#其他经常遇到的“高频词”" class="heading-link"><i class="fas fa-link"></i></a>其他经常遇到的“高频词”</h2>
+      <p>除了上面 6 个核心概念，你可能还会经常听到这几个词：</p>
+<ul>
+<li>**RAG (检索增强生成)**：AI 也会“开卷考试”。如果你问了它不知道的内部知识，RAG 技术会让 AI 先去公司的知识库里“检索”相关资料，然后再根据找出来的资料来“生成”回答。这就解决了 AI 胡编乱造的问题。</li>
+<li>**Fine-tuning (微调)**：把 AI 送去“上补习班”。通过给大模型喂大量的专业领域数据（比如医疗、法律），让它在这个特定领域变得极其专业。</li>
+<li>**Hallucination (幻觉)**：AI 在“一本正经地胡说八道”。当 AI 不知道答案，或者理解错了问题时，它可能会编造出看似合理但完全虚假的事实。解决幻觉是目前 AI 领域最重要的研究方向之一。</li>
+</ul>
+
+        <h2 id="总结：一张图看懂它们的关系"   >
+          <a href="#总结：一张图看懂它们的关系" class="heading-link"><i class="fas fa-link"></i></a>总结：一张图看懂它们的关系</h2>
+      <p>在掌握了这些名词之后，我们用下面这张图和一段话来总结它们在 AI 工作流中的关系：</p>
+<p><img src="/assets/ai_terms/concept_diagram.png" alt="概念关系图"><br><em>图：AI 核心名词概念区分</em></p>
+<ul>
+<li>就像是在和人交流一样，你需要用 <strong>Token</strong>（最小沟通单元）来衡量成本；</li>
+<li>你必须认真打磨 <strong>Prompt</strong>（沟通技巧与指令）来告诉 AI 你想要什么；</li>
+<li>交流时你必须提供足够多的背景信息，这依赖于庞大的 <strong>Context Window</strong>（短期记忆空间）；</li>
+<li>为了让 AI 帮你干活，你得给它配备工具 <strong>Skills</strong>（手和脚）；</li>
+<li>当你给 AI 一个大目标，让它自己规划调用这些工具时，它就成了一个 <strong>Agent</strong>（独立工作的数字员工）；</li>
+<li>最终，为了让这个员工能随时读取你电脑和公司里的各种资料，你需要用 <strong>MCP</strong>（万能 USB 接口）把它和数据源连接起来。</li>
+</ul>
+<p>希望这篇文章能帮你更好地理解和使用 AI。AI 的时代已经到来，不用害怕它，去使用它吧！</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://shufanhao.top">Frank 微信公众号 浩运来琳</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://shufanhao.top/posts/755b25eb/">https://shufanhao.top/posts/755b25eb/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/ai/">ai</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/tech/">tech</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/prompt/">prompt</a></span><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/agent/">agent</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/assets/ali_pay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/assets/wechat_pay.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/a3e2e41a/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">AI为什么是普通人的杠杆？</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/85df51f2/"><span class="paginator-prev__text">一文彻底理解 Google 依赖注入(DI) 框架 Guice</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Token%EF%BC%9AAI-%E7%9C%BC%E4%B8%AD%E7%9A%84%E2%80%9C%E5%AD%97%E2%80%9D%E4%B8%8E%E2%80%9C%E8%AF%8D%E2%80%9D"><span class="toc-number">1.</span> <span class="toc-text">
+          1. Token：AI 眼中的“字”与“词”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Prompt%EF%BC%88%E6%8F%90%E7%A4%BA%E8%AF%8D%EF%BC%89%EF%BC%9A%E4%BD%A0%E7%BB%99-AI-%E4%B8%8B%E7%9A%84%E2%80%9C%E5%92%92%E8%AF%AD%E2%80%9D"><span class="toc-number">2.</span> <span class="toc-text">
+          2. Prompt（提示词）：你给 AI 下的“咒语”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Context%EF%BC%88%E4%B8%8A%E4%B8%8B%E6%96%87%EF%BC%89%E4%B8%8E-Context-Window%EF%BC%88%E4%B8%8A%E4%B8%8B%E6%96%87%E7%AA%97%E5%8F%A3%EF%BC%89"><span class="toc-number">3.</span> <span class="toc-text">
+          3. Context（上下文）与 Context Window（上下文窗口）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-Skills%EF%BC%88%E6%8A%80%E8%83%BD%EF%BC%89%EF%BC%9A%E7%BB%99-AI-%E8%A3%85%E4%B8%8A%E6%89%8B%E8%84%9A"><span class="toc-number">4.</span> <span class="toc-text">
+          4. Skills（技能）：给 AI 装上手脚</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Agent%EF%BC%88%E6%99%BA%E8%83%BD%E4%BD%93%EF%BC%89%EF%BC%9A%E6%8B%A5%E6%9C%89%E8%87%AA%E4%B8%BB%E6%84%8F%E8%AF%86%E7%9A%84%E2%80%9C%E6%95%B0%E5%AD%97%E5%91%98%E5%B7%A5%E2%80%9D"><span class="toc-number">5.</span> <span class="toc-text">
+          5. Agent（智能体）：拥有自主意识的“数字员工”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-MCP%EF%BC%88%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE%EF%BC%89%EF%BC%9AAI-%E6%97%B6%E4%BB%A3%E7%9A%84%E2%80%9CUSB-%E6%8E%A5%E5%8F%A3%E2%80%9D"><span class="toc-number">6.</span> <span class="toc-text">
+          6. MCP（模型上下文协议）：AI 时代的“USB 接口”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E7%BB%8F%E5%B8%B8%E9%81%87%E5%88%B0%E7%9A%84%E2%80%9C%E9%AB%98%E9%A2%91%E8%AF%8D%E2%80%9D"><span class="toc-number">7.</span> <span class="toc-text">
+          其他经常遇到的“高频词”</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E4%B8%80%E5%BC%A0%E5%9B%BE%E7%9C%8B%E6%87%82%E5%AE%83%E4%BB%AC%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="toc-number">8.</span> <span class="toc-text">
+          总结：一张图看懂它们的关系</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/WechatIMG112.jpeg" alt="avatar"></div><p class="sidebar-ov-author__text">越努力，越幸运</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/shufanhao" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2043858835" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="1144825268" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">15</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">27</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2026</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Frank 微信公众号 浩运来琳</span></div><div><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.2.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://shufanhao.top/posts/755b25eb/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://shufanhao.top/posts/755b25eb/';
+        this.page.identifier = 'posts/755b25eb/';
+        this.page.title = '告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://shufanhao-github-io.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://shufanhao-github-io.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.2.0"></script><script src="/js/stun-boot.js?v=2.2.0"></script><script src="/js/scroll.js?v=2.2.0"></script><script src="/js/header.js?v=2.2.0"></script><script src="/js/sidebar.js?v=2.2.0"></script><script type="application/json" src="/search.xml"></script></body></html>

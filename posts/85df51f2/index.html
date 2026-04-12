@@ -1,0 +1,656 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/assets/jiqiren-16x16.svg?v=2.2.0" type="image/png" sizes="16x16"><link rel="icon" href="/assets/jiqiren-32x32.svg?v=2.2.0" type="image/png" sizes="32x32"><meta name="google-site-verification" content="36z2JWLXgmHzuSp23WuqFEQMXfAhw7XD-Pe-rJtCpI0"><meta name="baidu-site-verification" content="code-q9cCzVTEA7"><meta name="description" content="Guice是Google开发的轻量级依赖注入(DI)框架，遵循JSR-330标准，通过@Inject等注解实现依赖管理。与Spring相比，Guice更轻量、启动更快，适合需要精细控制对象生命周期或对性能敏感的场景。依赖注入通过将对象依赖从外部注入而非内部创建，实现解耦、可测试性和生命周期管理。Guice提供构造函数、字段和方法三种注入方式，并通过Module配置绑定关系。@Provides注解用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一文彻底理解 Google 依赖注入(DI) 框架 Guice">
+<meta property="og:url" content="https://shufanhao.top/posts/85df51f2/index.html">
+<meta property="og:site_name" content="Frank&#39;s Blog">
+<meta property="og:description" content="Guice是Google开发的轻量级依赖注入(DI)框架，遵循JSR-330标准，通过@Inject等注解实现依赖管理。与Spring相比，Guice更轻量、启动更快，适合需要精细控制对象生命周期或对性能敏感的场景。依赖注入通过将对象依赖从外部注入而非内部创建，实现解耦、可测试性和生命周期管理。Guice提供构造函数、字段和方法三种注入方式，并通过Module配置绑定关系。@Provides注解用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-25T11:55:50.000Z">
+<meta property="article:modified_time" content="2026-04-12T02:52:59.952Z">
+<meta property="article:author" content="Frank 微信公众号 浩运来琳">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary"><title>一文彻底理解 Google 依赖注入(DI) 框架 Guice | Frank's Blog</title><link ref="canonical" href="https://shufanhao.top/posts/85df51f2/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.2.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  assistSearch: ["google","bing","baidu"],
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":false},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"ocean","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: {"avoidBanner":false},
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script><meta name="generator" content="Hexo 5.1.1"><link rel="alternate" href="/atom.xml" title="Frank's Blog" type="application/atom+xml">
+</head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/about/"><span class="header-nav-menu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-menu-item__text">关于</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/book/"><span class="header-nav-menu-item__icon"><i class="fas fa-book"></i></span><span class="header-nav-menu-item__text">书籍</span></a></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">Frank's Blog</div><div class="header-banner-info__subtitle">上天之所以不给你，是因为你要的不够强烈</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">一文彻底理解 Google 依赖注入(DI) 框架 Guice</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2025-10-25</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2026-04-12</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.7k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">11分</span></span><span class="post-meta-item post-meta-item--visitors"><span class="post-meta-item__icon"><i class="fas fa-eye"></i></span><span class="post-meta-item__info">阅读次数</span><span class="post-meta-item__value" id="busuanzi_value_page_pv"></span></span></div></header><div class="post-body"><p>Guice是Google开发的轻量级依赖注入(DI)框架，遵循JSR-330标准，通过@Inject等注解实现依赖管理。与Spring相比，Guice更轻量、启动更快，适合需要精细控制对象生命周期或对性能敏感的场景。依赖注入通过将对象依赖从外部注入而非内部创建，实现解耦、可测试性和生命周期管理。Guice提供构造函数、字段和方法三种注入方式，并通过Module配置绑定关系。@Provides注解用于复杂对象的创建，而@Inject用于自动构造对象。与Spring自动扫描不同，Guice需要显式声明依赖关系，</p>
+<a id="more"></a>
+
+
+        <h2 id="什么是Guice"   >
+          <a href="#什么是Guice" class="heading-link"><i class="fas fa-link"></i></a>什么是Guice</h2>
+      <p>Guice（发音同”juice”）是Google于2007年开源的一款轻量级依赖注入（Dependency Injection，DI）框架。作为Java平台上的IoC容器实现，它通过注解驱动的方式简化了依赖管理，是Spring框架之外的重要选择。通常用在非Spring的项目中，实现依赖注入的功能。</p>
+<p>核心特性包括：</p>
+<ol>
+<li>基于JSR-330标准实现，使用@Inject等标准注解</li>
+<li>采用编译时验证机制，能在启动阶段发现大部分配置错误</li>
+<li>相比Spring更轻量，启动速度更快（基准测试显示启动时间可缩短50%以上）</li>
+</ol>
+<p>典型应用场景：</p>
+<ul>
+<li>需要精细控制对象生命周期的应用（如服务器中间件）</li>
+<li>对启动性能敏感的服务（如命令行工具）</li>
+</ul>
+
+        <h2 id="什么是DI（依赖注入）"   >
+          <a href="#什么是DI（依赖注入）" class="heading-link"><i class="fas fa-link"></i></a>什么是DI（依赖注入）</h2>
+      <p>依赖注入就是：</p>
+<p>把一个对象需要的依赖（即它所依赖的其他对象），从外部“注入”进去，而不是自己在内部创建。通俗一点讲：<br>    •    不再由类自己去 new 出它需要的对象；<br>    •    而是由一个“容器”（比如 Spring 或 Guice）帮你创建这些对象，并自动传给需要它们的类。</p>
+<p>举个例子<br>✅ 没有依赖注入的写法</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository repo;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.repo = <span class="keyword">new</span> UserRepository(); <span class="comment">// ❌ 直接在这里 new</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">createUser</span><span class="params">(String name)</span> </span>&#123;</span><br><span class="line">        repo.save(name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>👉 这样写的问题：<br>    1.    UserService 强依赖具体实现 UserRepository；<br>    2.    你无法轻易换成别的实现，比如 MockUserRepository；<br>    3.    测试时不方便（没法注入 mock 对象）；<br>    4.    对象的生命周期（什么时候创建、销毁）不好统一管理。</p>
+<p>那使用依赖注入的写法:</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository repo;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 依赖通过构造函数注入</span></span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(UserRepository repo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.repo = repo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>然后在 Guice 或 Spring 里配置：</p>
+<p>Guice:</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyModule</span> <span class="keyword">extends</span> <span class="title">AbstractModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        bind(UserRepository.class).to(PostgresUserRepository.class);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+<p>Spring:</p>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> UserRepository repo;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(UserRepository repo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.repo = repo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>👉 这样容器会自动：<br>    •    创建 PostgresUserRepository；<br>    •    创建 UserService；<br>    •    并把前者注入给后者。</p>
+
+        <h2 id="为什么需要依赖注入？"   >
+          <a href="#为什么需要依赖注入？" class="heading-link"><i class="fas fa-link"></i></a>为什么需要依赖注入？</h2>
+      <ul>
+<li><strong>解耦</strong> 类不再依赖于具体实现，只依赖接口。</li>
+<li><strong>可替换性</strong> 可以在不同环境（dev/test/prod）注入不同实现。</li>
+<li><strong>易测试</strong> 单元测试中可注入 mock 对象。</li>
+<li><strong>生命周期管理</strong> 容器统一管理对象的创建、销毁、单例/多例。</li>
+</ul>
+
+        <h2 id="如何进行依赖注入"   >
+          <a href="#如何进行依赖注入" class="heading-link"><i class="fas fa-link"></i></a>如何进行依赖注入 ?</h2>
+      <p>举个例子</p>
+<ol>
+<li>定义一个服务类</li>
+</ol>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">AddressService</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">queryCity</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaiduAddressService</span> <span class="keyword">implements</span> <span class="title">AddressService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">queryCity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;百度地图&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GaodeAddressService</span> <span class="keyword">implements</span> <span class="title">AddressService</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">queryCity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;高德地图&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<ol start="2">
+<li>创建依赖使用者（Consumer）</li>
+</ol>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserService</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> AddressService addressService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Inject</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">UserService</span><span class="params">(<span class="meta">@Named(&quot;gaodeAddressService&quot;)</span> AddressService addressService)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.addressService = addressService;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">queryUser</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(addressService.queryCity());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>💬 解释：</p>
+<ul>
+<li>@Inject 表示构造函数由 Guice 自动注入</li>
+<li>@Named(“gaodeAddressService”)，用于区分不同实现；</li>
+<li>依赖关系通过构造函数明确表达。</li>
+</ul>
+<ol start="3">
+<li>配置 Guice 模块（Module）</li>
+</ol>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceModule</span> <span class="keyword">extends</span> <span class="title">AbstractModule</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="comment">// 绑定接口到实现</span></span><br><span class="line">        bind(AddressService.class)</span><br><span class="line">            .annotatedWith(Names.named(<span class="string">&quot;gaodeAddressService&quot;</span>))</span><br><span class="line">            .to(GaodeAddressService.class);</span><br><span class="line"></span><br><span class="line">        bind(AddressService.class)</span><br><span class="line">            .annotatedWith(Names.named(<span class="string">&quot;baiduAddressService&quot;</span>))</span><br><span class="line">            .to(BaiduAddressService.class);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 使用 @Provides 提供复杂对象</span></span><br><span class="line">    <span class="meta">@Provides</span></span><br><span class="line">    <span class="meta">@Singleton</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> DataSource <span class="title">provideDataSource</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        HikariConfig config = <span class="keyword">new</span> HikariConfig();</span><br><span class="line">        config.setJdbcUrl(<span class="string">&quot;jdbc:postgresql://localhost:5432/testdb&quot;</span>);</span><br><span class="line">        config.setUsername(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        config.setPassword(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> HikariDataSource(config);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<p>💬 解释：<br>    •    bind(…).to(…)：声明接口与实现的映射；<br>    •    @Provides：当类无法直接用 @Inject 创建时，手动提供一个“工厂方法”；就是不能通过构造函数这种方式创建对象时。<br>    •    @Singleton：让对象全局只创建一次。</p>
+<ol start="4">
+<li>启动并获取对象</li>
+</ol>
+<figure class="highlight java"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Injector injector = Guice.createInjector(<span class="keyword">new</span> ServiceModule());</span><br><span class="line"></span><br><span class="line">        UserService userService = injector.getInstance(UserService.class);</span><br><span class="line">        userService.queryUser(); <span class="comment">// 输出: 高德地图</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
+
+<ul>
+<li>Guice.createInjector(…) 创建依赖注入容器； </li>
+<li>injector.getInstance(…)</li>
+<li>从容器中获取实例; </li>
+<li>所有依赖（UserService → AddressService）自动注入完成</li>
+</ul>
+
+        <h2 id="依赖注入的方式"   >
+          <a href="#依赖注入的方式" class="heading-link"><i class="fas fa-link"></i></a>依赖注入的方式</h2>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>注入方式</th>
+<th>代码示例</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>✅ 构造函数注入</td>
+<td><code>@Inject public UserService(AddressService a)</code></td>
+<td>依赖明确，不可变</td>
+<td>依赖较多时构造函数冗长</td>
+</tr>
+<tr>
+<td>⚙️ 字段注入</td>
+<td><code>@Inject private AddressService a;</code></td>
+<td>代码简洁</td>
+<td>隐藏依赖关系，难以测试</td>
+</tr>
+<tr>
+<td>🧩 方法注入</td>
+<td><code>@Inject void setAddressService(AddressService a)</code></td>
+<td>适合可选依赖或循环依赖</td>
+<td>不够直观，延迟初始化时使用</td>
+</tr>
+</tbody></table></div>
+
+        <h2 id="Provides-与-Inject-的区别"   >
+          <a href="#Provides-与-Inject-的区别" class="heading-link"><i class="fas fa-link"></i></a>@Provides 与 @Inject 的区别</h2>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>特性</th>
+<th><code>@Inject</code></th>
+<th><code>@Provides</code></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>用法</strong></td>
+<td>在构造函数或字段上标注</td>
+<td>在 Module 中定义方法</td>
+</tr>
+<tr>
+<td><strong>目的</strong></td>
+<td>让 Guice 自动构造对象</td>
+<td>手动定义复杂对象的创建逻辑</td>
+</tr>
+<tr>
+<td><strong>适用场景</strong></td>
+<td>类能被直接构造</td>
+<td>类构造逻辑复杂、或需外部依赖</td>
+</tr>
+</tbody></table></div>
+
+        <h2 id="Guice和Spring的对比"   >
+          <a href="#Guice和Spring的对比" class="heading-link"><i class="fas fa-link"></i></a>Guice和Spring的对比</h2>
+      <div class="table-container"><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Guice</th>
+<th>Spring</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>注解</strong></td>
+<td><code>@Inject</code>, <code>@Provides</code>, <code>@Singleton</code></td>
+<td><code>@Autowired</code>, <code>@Service</code>, <code>@Component</code></td>
+</tr>
+<tr>
+<td><strong>配置方式</strong></td>
+<td>手动声明 Module</td>
+<td>自动扫描 classpath</td>
+</tr>
+<tr>
+<td><strong>优点</strong></td>
+<td>轻量、启动快、显式依赖</td>
+<td>自动化、生态完善</td>
+</tr>
+<tr>
+<td><strong>典型场景</strong></td>
+<td>微服务、工具、内部服务</td>
+<td>企业应用、大型项目</td>
+</tr>
+</tbody></table></div>
+<div class="table-container"><table>
+<thead>
+<tr>
+<th>功能</th>
+<th>Spring Boot 注解</th>
+<th>Guice 注解</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>声明依赖注入点</td>
+<td><code>@Autowired</code></td>
+<td><code>@Inject</code></td>
+<td>Guice 遵循 JSR-330 标准，与 Spring 的 <code>@Autowired</code> 类似。</td>
+</tr>
+<tr>
+<td>声明组件/服务</td>
+<td><code>@Component</code>, <code>@Service</code>, <code>@Repository</code>, <code>@Controller</code></td>
+<td>无对应注解（需在 Module 中绑定）</td>
+<td>Spring 自动扫描这些 Bean；Guice 需要显式在 Module 里 <code>bind()</code>。</td>
+</tr>
+<tr>
+<td>构造函数注入</td>
+<td><code>@Autowired</code> 放在构造函数上</td>
+<td><code>@Inject</code> 放在构造函数上</td>
+<td>两者都支持构造函数注入。</td>
+</tr>
+<tr>
+<td>提供自定义实例</td>
+<td><code>@Bean</code>（在 <code>@Configuration</code> 类中）</td>
+<td><code>@Provides</code>（在 <code>AbstractModule</code> 中）</td>
+<td>两者都用于手动创建并返回依赖对象。</td>
+</tr>
+<tr>
+<td>限定注入（多实现选择）</td>
+<td><code>@Qualifier(&quot;beanName&quot;)</code></td>
+<td><code>@Named(&quot;name&quot;)</code> 或自定义 <code>@BindingAnnotation</code></td>
+<td>都可用于在多个实现中指定要注入哪一个。</td>
+</tr>
+<tr>
+<td>生命周期管理</td>
+<td><code>@PostConstruct</code>, <code>@PreDestroy</code></td>
+<td>无内置支持（需手动管理）</td>
+<td>Spring 自动管理 Bean 生命周期；Guice 更加简单直接。</td>
+</tr>
+<tr>
+<td>配置类声明</td>
+<td><code>@Configuration</code></td>
+<td><code>extends AbstractModule</code></td>
+<td>Spring 用配置类声明 Bean；Guice 用模块绑定依赖。</td>
+</tr>
+</tbody></table></div>
+<p>希望看完本文后，你对Guice有一个彻底的理解，并且能够顺利应用到项目中。</p>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="https://shufanhao.top">Frank 微信公众号 浩运来琳</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="https://shufanhao.top/posts/85df51f2/">https://shufanhao.top/posts/85df51f2/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="https://shufanhao.top/tags/java/">java</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/assets/ali_pay.jpg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/assets/wechat_pay.jpg"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-prev"><a class="paginator-prev__link" href="/posts/755b25eb/"><span class="paginator-prev__icon"><i class="fas fa-angle-left"></i></span><span class="paginator-prev__text">告别 AI 小白！这 6 个核心黑话，才是你玩转 AI 的入场券</span></a></div><div class="paginator-next"><a class="paginator-next__link" href="/posts/4e00340d/"><span class="paginator-prev__text">必看！本地安装 DeepSeek 超详细教程</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div><div class="comments" id="comments"><div id="disqus_thread"></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFGuice"><span class="toc-number">1.</span> <span class="toc-text">
+          什么是Guice</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFDI%EF%BC%88%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">
+          什么是DI（依赖注入）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%EF%BC%9F"><span class="toc-number">3.</span> <span class="toc-text">
+          为什么需要依赖注入？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5"><span class="toc-number">4.</span> <span class="toc-text">
+          如何进行依赖注入 ?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="toc-number">5.</span> <span class="toc-text">
+          依赖注入的方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Provides-%E4%B8%8E-Inject-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.</span> <span class="toc-text">
+          @Provides 与 @Inject 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Guice%E5%92%8CSpring%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">7.</span> <span class="toc-text">
+          Guice和Spring的对比</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/WechatIMG112.jpeg" alt="avatar"></div><p class="sidebar-ov-author__text">越努力，越幸运</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/shufanhao" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="https://weibo.com/u/2043858835" target="_blank" rel="noopener" data-popover="微博" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weibo"></i></span></a><a class="sidebar-ov-social-item" href="1144825268" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">35</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">15</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">27</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span><span class="sidebar-reading-info__perc">%</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2026</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Frank 微信公众号 浩运来琳</span></div><div><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.2.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"><div class="search-btns">使用搜索：<span class="search-btns-item search-btns-item--google"><i class="fab fa-google"></i>谷歌</span><span class="search-btns-item search-btns-item--bing"><i></i>必应</span><span class="search-btns-item search-btns-item--baidu"><i></i>百度</span></div></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/npm/ribbon.js@latest/dist/ribbon.min.js" size="120" alpha="0.6" zIndex="-1"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.xml';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);
+
+function safeOpenUrl(url) {
+  var newTab = window.open();
+  newTab.opener = null;
+  newTab.location = url;
+}
+
+function extSearch(engine) {
+  var engines = {
+    google: 'https://www.google.com/search?q=',
+    bing: 'https://cn.bing.com/search?q=',
+    baidu: 'https://www.baidu.com/s?ie=UTF-8&wd=',
+  };
+  var host = window.location.host;
+  var query = $('.search-input input').val().toLowerCase().trim();
+  var uri = engines[engine] + query + ' site:' + host;
+
+  if (query) {
+    safeOpenUrl(uri);
+  } else {
+    Stun.utils.popAlert('warning', '请输入字符');
+  }
+}
+
+var assistSearchList = window.CONFIG.assistSearch;
+
+if (Array.isArray(assistSearchList)) {
+  assistSearchList.forEach(function (name) {
+    document.querySelector('.search-btns-item--' + name).addEventListener('click', function () {
+      extSearch(name);
+    }, false);
+  });
+}</script><script src="https://cdn.jsdelivr.net/npm/pjax@latest/pjax.min.js"></script><script>window.addEventListener('DOMContentLoaded', function () {
+  var pjax = new Pjax({"selectors":["head title","#main",".pjax-reload"],"history":true,"scrollTo":false,"scrollRestoration":false,"cacheBust":false,"debug":false,"currentUrlFullReload":false,"timeout":0});
+  // 加载进度条的计时器
+  var loadingTimer = null;
+
+  // 重置页面 Y 方向上的滚动偏移量
+  document.addEventListener('pjax:send', function () {
+    $('.header-nav-menu').removeClass('show');
+    if (CONFIG.pjax && CONFIG.pjax.avoidBanner) {
+      $('html').velocity('scroll', {
+        duration: 500,
+        offset: $('#header').height(),
+        easing: 'easeInOutCubic'
+      });
+    }
+
+    var loadingBarWidth = 20;
+    var MAX_LOADING_WIDTH = 95;
+
+    $('.loading-bar').addClass('loading');
+    $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    clearInterval(loadingTimer);
+    loadingTimer = setInterval(function () {
+      loadingBarWidth += 3;
+      if (loadingBarWidth > MAX_LOADING_WIDTH) {
+        loadingBarWidth = MAX_LOADING_WIDTH;
+      }
+      $('.loading-bar__progress').css('width', loadingBarWidth + '%');
+    }, 500);
+  }, false);
+
+  window.addEventListener('pjax:complete', function () {
+    clearInterval(loadingTimer);
+    $('.loading-bar__progress').css('width', '100%');
+    $('.loading-bar').removeClass('loading');
+    setTimeout(function () {
+      $('.loading-bar__progress').css('width', '0');
+    }, 400);
+    $('link[rel=prefetch], script[data-pjax-rm]').each(function () {
+      $(this).remove();
+    });
+    $('script[data-pjax], #pjax-reload script').each(function () {
+      $(this).parent().append($(this).remove());
+    });
+
+    if (Stun.utils.pjaxReloadBoot) {
+      Stun.utils.pjaxReloadBoot();
+    }
+    if (Stun.utils.pjaxReloadScroll) {
+      Stun.utils.pjaxReloadScroll();
+    }
+    if (Stun.utils.pjaxReloadSidebar) {
+      Stun.utils.pjaxReloadSidebar();
+    }
+    if (false) {
+      if (Stun.utils.pjaxReloadHeader) {
+        Stun.utils.pjaxReloadHeader();
+      }
+      if (Stun.utils.pjaxReloadScrollIcon) {
+        Stun.utils.pjaxReloadScrollIcon();
+      }
+      if (Stun.utils.pjaxReloadLocalSearch) {
+        Stun.utils.pjaxReloadLocalSearch();
+      }
+    }
+  }, false);
+}, false);</script><div id="pjax-reload"><script src="https://cdn.jsdelivr.net/npm/quicklink@1.0.1/dist/quicklink.umd.js"></script><script>function initQuicklink() {
+  quicklink({
+    timeout: '10000',
+    priority: true,
+    ignores: [uri => uri.includes('#'), uri => uri === 'https://shufanhao.top/posts/85df51f2/', /\/api\/?/,uri => uri.includes('.xml'),uri => uri.includes('.zip'),(uri, el) => el.hasAttribute('nofollow'),(uri, el) => el.hasAttribute('noprefetch')]
+  });
+}
+
+if (true || false) {
+  initQuicklink();
+} else {
+  window.addEventListener('DOMContentLoaded', initQuicklink, false);
+}</script><script src="https://cdn.jsdelivr.net/gh/sukkaw/busuanzi@latest/bsz.pure.mini.js" async></script></div><script data-pjax="">function loadDisqus () {
+  if (!document.getElementById('disqus_thread')) {
+    return;
+  }
+  if (window.DISQUS) {
+    DISQUS.reset({
+      reload: true,
+      config: function () {
+        this.page.url = 'https://shufanhao.top/posts/85df51f2/';
+        this.page.identifier = 'posts/85df51f2/';
+        this.page.title = '一文彻底理解 Google 依赖注入(DI) 框架 Guice';
+      }
+    });
+  } else {
+    var d = document;
+    var sc = d.createElement('script');
+    var se = d.createElement('script');
+
+    if (true) {
+      sc.src = 'https://shufanhao-github-io.disqus.com/count.js';
+      sc.id = 'dsq-count-scr';
+      sc.async = true;
+      if (true) {
+        sc.setAttribute('data-pjax', '');
+      }
+      (d.head || d.body).appendChild(sc);
+    }
+    se.src = 'https://shufanhao-github-io.disqus.com/embed.js';
+    (d.head || d.body).appendChild(se);
+  }
+}
+
+if (true) {
+  loadDisqus();
+} else {
+  window.addEventListener('DOMContentLoaded', loadDisqus, false);
+}</script><script src="/js/utils.js?v=2.2.0"></script><script src="/js/stun-boot.js?v=2.2.0"></script><script src="/js/scroll.js?v=2.2.0"></script><script src="/js/header.js?v=2.2.0"></script><script src="/js/sidebar.js?v=2.2.0"></script><script type="application/json" src="/search.xml"></script></body></html>
